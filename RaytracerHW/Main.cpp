@@ -1,6 +1,29 @@
 #include <iostream>
 
+#include "Parser.hpp"
+
 int main()
 {
-    std::cout << "Hello World!\n";
+    try
+    {
+        std::vector<Config> c = Parser::ParseFile("scene1.test");
+    }
+    catch (const std::invalid_argument& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    catch (const std::runtime_error& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    catch (...)
+    {
+        std::cerr << "Unhandled exception caught\n";
+    }
+
+    system("pause");
 }
