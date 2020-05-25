@@ -25,18 +25,54 @@ auto Parser::ParseFile(std::string_view file) -> std::vector<Config>
                     std::string token{};
                     std::istringstream ss(line);
 
+                    // Extract token
                     ss >> token;
                     token = ToLower(token);
+
+                    // Values for the token
+                    std::string values(line.substr(token.size()));
 
                     try
                     {
                         if (token == Config::CameraToken)
                         {
-                            configs.push_back(ExtractParams(Config::Type::Camera, line.substr(token.size())));
+                            configs.push_back(ExtractParams(Config::Type::Camera, values));
                         }
                         else if (token == Config::SizeToken)
                         {
-                            configs.push_back(ExtractParams(Config::Type::Size, line.substr(token.size())));
+                            configs.push_back(ExtractParams(Config::Type::Size, values));
+                        }
+                        else if (token == Config::AmbientToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::Ambient, values));
+                        }
+                        else if (token == Config::DirectionalToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::Directional, values));
+                        }
+                        else if (token == Config::PointToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::Point, values));
+                        }
+                        else if (token == Config::DiffuseToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::Diffuse, values));
+                        }
+                        else if (token == Config::SpecularToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::Specular, values));
+                        }
+                        else if (token == Config::MaxVertexToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::MaxVertex, values));
+                        }
+                        else if (token == Config::VertexToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::Vertex, values));
+                        }
+                        else if (token == Config::TriangleToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::Triangle, values));
                         }
                         else
                         {

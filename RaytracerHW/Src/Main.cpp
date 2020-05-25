@@ -4,9 +4,11 @@
 
 int main()
 {
+    std::vector<Config> c{};
+
     try
     {
-        std::vector<Config> c = Parser::ParseFile("scene1.test");
+         c = Parser::ParseFile("scene1.test");
     }
     catch (const std::runtime_error& e)
     {
