@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Parser.hpp"
+#include "Image.hpp"
 
 int main()
 {
@@ -8,7 +9,7 @@ int main()
 
     try
     {
-         c = Parser::ParseFile("scene1.test");
+        c = Parser::ParseFile("scene1.test");
     }
     catch (const std::runtime_error& e)
     {
@@ -23,5 +24,7 @@ int main()
         std::cerr << "Unhandled exception caught\n";
     }
 
-    system("pause");
+    Image img(256, 256);
+    img.Clear({ 0, 255, 255 });
+    img.Save("test.png");
 }

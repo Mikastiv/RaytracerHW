@@ -83,9 +83,8 @@ auto Parser::ParseFile(std::string_view file) -> std::vector<Config>
                     {
                         const auto CreateErrorStr = [](std::string_view file, int lineNo) {
                             std::ostringstream error{};
-                            std::filesystem::path filePath(file);
                             error << "Bad parameter token at line " << lineNo << ", [File] "
-                                  << std::filesystem::absolute(filePath);
+                                  << std::filesystem::absolute(file);
 
                             return error.str();
                         };
@@ -99,8 +98,7 @@ auto Parser::ParseFile(std::string_view file) -> std::vector<Config>
         {
             const auto CreateErrorStr = [](std::string_view file) {
                 std::ostringstream error{};
-                std::filesystem::path filePath(file);
-                error << "Could not open file " << std::filesystem::absolute(filePath);
+                error << "Could not open file " << std::filesystem::absolute(file);
 
                 return error.str();
             };
@@ -117,7 +115,7 @@ auto Parser::ExtractParams(Config::Type type, std::string_view line) -> Config
     std::istringstream ss(line.data());
 
     std::vector<float> params{};
-    
+
     for (std::string value; ss >> value;)
     {
         params.push_back(std::stof(value));
