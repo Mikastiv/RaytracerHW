@@ -8,10 +8,6 @@ int main()
     {
         std::vector<Config> c = Parser::ParseFile("scene1.test");
     }
-    catch (const std::invalid_argument& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
     catch (const std::runtime_error& e)
     {
         std::cerr << e.what() << '\n';

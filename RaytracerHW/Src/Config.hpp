@@ -8,7 +8,8 @@ class Config
 public:
     enum class Type
     {
-        Camera
+        Camera,
+        Size
     };
 
 public:

@@ -141,17 +141,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Config.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="Src\Config.cpp" />
+    <ClCompile Include="Src\Main.cpp" />
+    <ClCompile Include="Src\Parser.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Config.hpp" />
-    <ClInclude Include="Parser.hpp" />
-    <ClInclude Include="Utils.hpp" />
+    <ClInclude Include="Src\Config.hpp" />
+    <ClInclude Include="Src\Parser.hpp" />
+    <ClInclude Include="Src\Utils.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".clang-format" />
+    <None Include="scene1.test" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
