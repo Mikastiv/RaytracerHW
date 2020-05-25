@@ -30,6 +30,8 @@ public:
         Ambient,
         Diffuse,
         Specular,
+        Shininess,
+        Emission
     };
 
 public:
@@ -56,6 +58,8 @@ public:
     static constexpr std::string_view AmbientToken          = "ambient";
     static constexpr std::string_view DiffuseToken          = "diffuse";
     static constexpr std::string_view SpecularToken         = "specular";
+    static constexpr std::string_view ShininessToken        = "shininess";
+    static constexpr std::string_view EmissionToken         = "emission";
     //clang-format on
 
 public:
