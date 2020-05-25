@@ -57,5 +57,6 @@
     <None Include="scene5.test" />
     <None Include="scene6.test" />
     <None Include="scene7.test" />
+    <None Include="Src\LICENSES.md" />
   </ItemGroup>
 </Project>
