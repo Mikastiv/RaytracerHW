@@ -34,17 +34,69 @@ auto Parser::ParseFile(std::string_view file) -> std::vector<Config>
 
                     try
                     {
-                        if (token == Config::CameraToken)
-                        {
-                            configs.push_back(ExtractParams(Config::Type::Camera, values));
-                        }
-                        else if (token == Config::SizeToken)
+                        if (token == Config::SizeToken)
                         {
                             configs.push_back(ExtractParams(Config::Type::Size, values));
                         }
-                        else if (token == Config::AmbientToken)
+                        else if (token == Config::MaxDepthToken)
                         {
-                            configs.push_back(ExtractParams(Config::Type::Ambient, values));
+                            configs.push_back(ExtractParams(Config::Type::MaxDepth, values));
+                        }
+                        else if (token == Config::OutputToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::Output, values));
+                        }
+                        else if (token == Config::CameraToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::Camera, values));
+                        }
+                        else if (token == Config::SphereToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::Sphere, values));
+                        }
+                        else if (token == Config::MaxVertexToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::MaxVertex, values));
+                        }
+                        else if (token == Config::MaxVertexNormalToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::MaxVertexNorms, values));
+                        }
+                        else if (token == Config::VertexToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::Vertex, values));
+                        }
+                        else if (token == Config::VertexNormalToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::VertexNormal, values));
+                        }
+                        else if (token == Config::TriangleToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::Triangle, values));
+                        }
+                        else if (token == Config::TriangleNormalToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::TriangleNormal, values));
+                        }
+                        else if (token == Config::TranslateToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::Translate, values));
+                        }
+                        else if (token == Config::RotateToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::Rotate, values));
+                        }
+                        else if (token == Config::ScaleToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::Scale, values));
+                        }
+                        else if (token == Config::PushTransformToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::PushTransform, values));
+                        }
+                        else if (token == Config::PopTransformToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::PopTransform, values));
                         }
                         else if (token == Config::DirectionalToken)
                         {
@@ -54,6 +106,14 @@ auto Parser::ParseFile(std::string_view file) -> std::vector<Config>
                         {
                             configs.push_back(ExtractParams(Config::Type::Point, values));
                         }
+                        else if (token == Config::AttenuationToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::Attenuation, values));
+                        }
+                        else if (token == Config::AmbientToken)
+                        {
+                            configs.push_back(ExtractParams(Config::Type::Ambient, values));
+                        }
                         else if (token == Config::DiffuseToken)
                         {
                             configs.push_back(ExtractParams(Config::Type::Diffuse, values));
@@ -61,18 +121,6 @@ auto Parser::ParseFile(std::string_view file) -> std::vector<Config>
                         else if (token == Config::SpecularToken)
                         {
                             configs.push_back(ExtractParams(Config::Type::Specular, values));
-                        }
-                        else if (token == Config::MaxVertexToken)
-                        {
-                            configs.push_back(ExtractParams(Config::Type::MaxVertex, values));
-                        }
-                        else if (token == Config::VertexToken)
-                        {
-                            configs.push_back(ExtractParams(Config::Type::Vertex, values));
-                        }
-                        else if (token == Config::TriangleToken)
-                        {
-                            configs.push_back(ExtractParams(Config::Type::Triangle, values));
                         }
                         else
                         {

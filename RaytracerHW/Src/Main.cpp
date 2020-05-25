@@ -24,7 +24,7 @@ int main()
         std::cerr << "Unhandled exception caught\n";
     }
 
-    Image img(256, 256);
+    Image img(1024, 1024);
     img.Clear({ 0, 255, 255 });
     img.Save("test.png");
 }
