@@ -3,7 +3,7 @@
 #include "Vec3.hpp"
 
 template <typename T>
-class Point
+struct Point
 {
 public:
     Point() = default;
@@ -45,7 +45,7 @@ public:
     }
 
 public:
-    T x;
-    T y;
-    T z;
+    T x = static_cast<T>(0);
+    T y = static_cast<T>(0);
+    T z = static_cast<T>(0);
 };

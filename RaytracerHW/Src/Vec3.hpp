@@ -4,7 +4,7 @@
 #include <cassert>
 
 template <typename T>
-class Vec3
+struct Vec3
 {
 public:
     Vec3() = default;

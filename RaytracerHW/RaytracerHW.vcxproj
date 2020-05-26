@@ -90,6 +90,7 @@
     <ClInclude Include="Src\Image.hpp" />
     <ClInclude Include="Src\Parser.hpp" />
     <ClInclude Include="Src\Point.hpp" />
+    <ClInclude Include="Src\Ray.hpp" />
     <ClInclude Include="Src\Utils.hpp" />
     <ClInclude Include="Src\Vec3.hpp" />
   </ItemGroup>

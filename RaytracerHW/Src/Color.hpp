@@ -20,13 +20,25 @@ public:
     {
         return mR;
     }
+    constexpr auto GetRNorm() const noexcept -> float
+    {
+        return (float)mR / 255.0f;
+    }
     constexpr auto GetG() const noexcept -> uint8_t
     {
         return mG;
     }
+    constexpr auto GetGNorm() const noexcept -> float
+    {
+        return (float)mG / 255.0f;
+    }
     constexpr auto GetB() const noexcept -> uint8_t
     {
         return mB;
+    }
+    constexpr auto GetBNorm() const noexcept -> float
+    {
+        return (float)mB / 255.0f;
     }
     auto SetR(uint8_t r) noexcept -> void
     {
