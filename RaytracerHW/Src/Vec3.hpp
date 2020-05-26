@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cmath>
+#include <cassert>
 
 template <typename T>
 class Vec3
@@ -48,6 +49,8 @@ public:
     }
     auto operator/=(const T& rhs) -> Vec3&
     {
+        assert(rhs != static_cast<T>(0));
+
         x /= rhs;
         y /= rhs;
         z /= rhs;
@@ -73,6 +76,8 @@ public:
     T y = static_cast<T>(0);
     T z = static_cast<T>(0);
 };
+
+using Vec3f = Vec3<float>;
 
 template <typename T>
 inline auto Normalize(const Vec3<T>& vec) -> Vec3<T>
