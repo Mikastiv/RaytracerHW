@@ -79,12 +79,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Camera.cpp" />
     <ClCompile Include="Src\Config.cpp" />
     <ClCompile Include="Src\Image.cpp" />
     <ClCompile Include="Src\Main.cpp" />
     <ClCompile Include="Src\Parser.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Camera.hpp" />
     <ClInclude Include="Src\Color.hpp" />
     <ClInclude Include="Src\Config.hpp" />
     <ClInclude Include="Src\Image.hpp" />
