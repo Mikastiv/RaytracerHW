@@ -1,8 +1,9 @@
 #pragma once
 
 #include <cstdint>
+#include <tuple>
 
-// ARGB
+// RGB
 class Color
 {
 public:
@@ -39,6 +40,10 @@ public:
     constexpr auto GetBNorm() const noexcept -> float
     {
         return (float)mB / 255.0f;
+    }
+    constexpr auto GetRGBNorm() const noexcept -> std::tuple<float, float, float>
+    {
+        return { GetRNorm(), GetGNorm(), GetBNorm() };
     }
     auto SetR(uint8_t r) noexcept -> void
     {

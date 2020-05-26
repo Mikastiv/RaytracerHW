@@ -84,6 +84,7 @@
     <ClCompile Include="Src\Image.cpp" />
     <ClCompile Include="Src\Main.cpp" />
     <ClCompile Include="Src\Parser.cpp" />
+    <ClCompile Include="Src\Sampler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Camera.hpp" />
@@ -93,6 +94,8 @@
     <ClInclude Include="Src\Parser.hpp" />
     <ClInclude Include="Src\Point.hpp" />
     <ClInclude Include="Src\Ray.hpp" />
+    <ClInclude Include="Src\Sampler.hpp" />
+    <ClInclude Include="Src\Scene.hpp" />
     <ClInclude Include="Src\Utils.hpp" />
     <ClInclude Include="Src\Vec3.hpp" />
   </ItemGroup>

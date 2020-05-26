@@ -64,6 +64,7 @@ public:
 
 public:
     Config(Type type, std::vector<float> params);
+
     auto GetType() const -> Type;
     auto GetParams() const -> const std::vector<float>&;
 
