@@ -85,6 +85,7 @@
     <ClCompile Include="Src\Main.cpp" />
     <ClCompile Include="Src\Parser.cpp" />
     <ClCompile Include="Src\Sampler.cpp" />
+    <ClCompile Include="Src\Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Camera.hpp" />
