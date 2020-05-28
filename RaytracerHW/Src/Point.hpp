@@ -20,26 +20,26 @@ public:
         z += rhs.z;
         return *this;
     }
-    constexpr auto operator+(const Vec3<T>& rhs) const->Point
+    constexpr auto operator+(const Vec3<T>& rhs) const -> Point
     {
         return Point{ *this } += rhs;
     }
-    constexpr auto operator-=(const Vec3<T>& rhs)->Point&
+    constexpr auto operator-=(const Vec3<T>& rhs) -> Point&
     {
         x -= rhs.x;
         y -= rhs.y;
         z -= rhs.z;
         return *this;
     }
-    constexpr auto operator-(const Vec3<T>& rhs) const->Point
+    constexpr auto operator-(const Vec3<T>& rhs) const -> Point
     {
         return Point{ *this } -= rhs;
     }
-    constexpr auto operator+(const Point& rhs) const->Vec3<T>
+    constexpr auto operator+(const Point& rhs) const -> Vec3<T>
     {
         return { x + rhs.x, y + rhs.y, z + rhs.z };
     }
-    constexpr auto operator-(const Point& rhs) const->Vec3<T>
+    constexpr auto operator-(const Point& rhs) const -> Vec3<T>
     {
         return { x - rhs.x, y - rhs.y, z - rhs.z };
     }

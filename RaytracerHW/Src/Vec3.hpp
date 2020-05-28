@@ -14,40 +14,40 @@ public:
         , z(z)
     {
     }
-    constexpr auto operator+=(const Vec3& rhs)->Vec3&
+    constexpr auto operator+=(const Vec3& rhs) -> Vec3&
     {
         x += rhs.x;
         y += rhs.y;
         z += rhs.z;
         return *this;
     }
-    constexpr auto operator+(const Vec3& rhs) const->Vec3
+    constexpr auto operator+(const Vec3& rhs) const -> Vec3
     {
         return Vec3{ *this } += rhs;
     }
-    constexpr auto operator-=(const Vec3& rhs)->Vec3&
+    constexpr auto operator-=(const Vec3& rhs) -> Vec3&
     {
         x -= rhs.x;
         y -= rhs.y;
         z -= rhs.z;
         return *this;
     }
-    constexpr auto operator-(const Vec3& rhs) const->Vec3
+    constexpr auto operator-(const Vec3& rhs) const -> Vec3
     {
         return Vec3{ *this } -= rhs;
     }
-    constexpr auto operator*=(const T& rhs)->Vec3&
+    constexpr auto operator*=(const T& rhs) -> Vec3&
     {
         x *= rhs;
         y *= rhs;
         z *= rhs;
         return *this;
     }
-    constexpr auto operator*(const T& rhs) const->Vec3
+    constexpr auto operator*(const T& rhs) const -> Vec3
     {
         return Vec3{ *this } *= rhs;
     }
-    constexpr auto operator/=(const T& rhs)->Vec3&
+    constexpr auto operator/=(const T& rhs) -> Vec3&
     {
         assert(rhs != static_cast<T>(0));
 
@@ -56,7 +56,7 @@ public:
         z /= rhs;
         return *this;
     }
-    constexpr auto operator/(const T& rhs) const->Vec3
+    constexpr auto operator/(const T& rhs) const -> Vec3
     {
         return Vec3{ *this } /= rhs;
     }
@@ -69,6 +69,10 @@ public:
         const auto len = Length();
         *this /= len;
         return *this;
+    }
+    constexpr auto Cross(const Vec3& other) const -> Vec3
+    {
+        return { y * other.z - z * other.y, z * other.x - x * other.z, x * other.y - y * other.x };
     }
 
 public:
