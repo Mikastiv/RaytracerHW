@@ -5,28 +5,22 @@
 
 int main()
 {
-    const auto ReadConfigFile = [](std::string_view file) {
-        std::vector<Config> c{};
+    std::unique_ptr<Scene> scene = nullptr;
 
-        try
-        {
-            c = Parser::ParseFile(file);
-        }
-        catch (const std::runtime_error& e)
-        {
-            std::cerr << e.what() << '\n';
-        }
-        catch (const std::exception& e)
-        {
-            std::cerr << e.what() << '\n';
-        }
-        catch (...)
-        {
-            std::cerr << "Unhandled exception caught\n";
-        }
-
-        return c;
-    };
-
-    Scene scene{ ReadConfigFile("scene1.test") };
+    try
+    {
+        scene = std::make_unique<Scene>(SceneConfig{ Parser::ParseFile("scene1.test") });
+    }
+    catch (const std::runtime_error& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    catch (...)
+    {
+        std::cerr << "Unhandled exception caught\n";
+    }
 }

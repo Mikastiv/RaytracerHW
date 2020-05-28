@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Config.hpp"
+#include "SceneConfig.hpp"
 #include "Sampler.hpp"
 #include "Camera.hpp"
 #include "Point.hpp"
@@ -11,7 +11,7 @@ class Scene
 {
 public:
     Scene() = default;
-    Scene(const std::vector<Config>& configs);
+    Scene(const SceneConfig& c);
 
 private:
     Sampler mSampler{};

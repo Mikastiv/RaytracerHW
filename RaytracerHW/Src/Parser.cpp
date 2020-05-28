@@ -143,7 +143,7 @@ auto Parser::ParseFile(std::string_view file) -> std::vector<Config>
                 {
                     const auto CreateErrorStr = [](std::string_view file, int lineNo) {
                         std::ostringstream error{};
-                        error << "Bad parameter token at line " << lineNo << ", [File] "
+                        error << "Bad command token at line " << lineNo << ", [File] "
                               << std::filesystem::absolute(file);
 
                         return error.str();
@@ -173,11 +173,18 @@ auto Parser::ExtractParams(Config::Type type, std::string_view line) -> Config
 {
     std::istringstream ss(line.data());
 
-    std::vector<float> params{};
+    std::vector<std::variant<float, std::string>> params{};
 
     for (std::string value; ss >> value;)
     {
-        params.push_back(std::stof(value));
+        if (type == Config::Type::Output)
+        {
+            params.push_back(std::variant<float, std::string>{ value });
+        }
+        else
+        {
+            params.push_back(std::variant<float, std::string>{ std::stof(value) });
+        }
     }
 
     return Config(type, std::move(params));
