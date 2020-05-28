@@ -13,6 +13,6 @@ public:
     Scene(const SceneConfig& c);
 
 private:
-    Sampler mSampler{};
-    Camera mCamera{};
+    Sampler mSampler;
+    Camera mCamera;
 };

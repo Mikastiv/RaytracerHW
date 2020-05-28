@@ -8,7 +8,6 @@
 class Sampler
 {
 public:
-    Sampler() = default;
     Sampler(uint32_t screenWidth, uint32_t screenHeight);
 
     auto Sample() -> std::optional<std::pair<uint32_t, uint32_t>>;
