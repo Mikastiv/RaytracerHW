@@ -10,6 +10,7 @@ int main()
     try
     {
         scene = std::make_unique<Scene>(SceneConfig{ Parser::ParseFile("scene1.test") });
+        scene->Render();
     }
     catch (const std::runtime_error& e)
     {

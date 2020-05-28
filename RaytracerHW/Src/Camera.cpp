@@ -21,8 +21,8 @@ auto Camera::GenerateRay(std::pair<uint32_t, uint32_t> screenPixel) -> Ray<float
     const auto halfWidth = mWidth / 2.0f;
     const auto halfHeight = mHeight / 2.0f;
     const auto tanFovy = tan(mFovy / 2.0f);
-    const auto alpha = tanFovy * mAspect * (((y + 0.5f) - halfWidth) / halfWidth);
-    const auto beta = tanFovy * ((halfHeight - (x + 0.5f)) / halfHeight);
+    const auto alpha = tanFovy * mAspect * ((((float)y + 0.5f) - halfWidth) / halfWidth);
+    const auto beta = tanFovy * ((halfHeight - ((float)x + 0.5f)) / halfHeight);
     // const auto fovx = 2.0f * atan(tan(mFovy / 2.0f) * mAspect);
     // const auto alpha = tan(fovx / 2.0f) * (((y + 0.5f) - halfWidth) / halfWidth);
     // const auto beta = tanFovy * ((halfHeight - (x + 0.5f)) / halfHeight);
