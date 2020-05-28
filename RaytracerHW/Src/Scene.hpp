@@ -10,7 +10,6 @@
 class Scene
 {
 public:
-    Scene() = default;
     Scene(const SceneConfig& c);
 
 private:

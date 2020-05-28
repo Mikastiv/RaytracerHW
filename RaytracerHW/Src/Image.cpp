@@ -1,7 +1,6 @@
 #include "Image.hpp"
 
 #include <algorithm>
-#include <memory>
 #include <OpenImageIO/imageio.h>
 
 Image::Image(uint32_t width, uint32_t height)

@@ -9,7 +9,6 @@
 class Camera
 {
 public:
-    Camera() = default;
     Camera(uint32_t width, uint32_t height, float fovy, Point<float> eye, Point<float> lookAt, Vec3f up);
 
     auto GenerateRay(std::pair<uint32_t, uint32_t> screenPixel) -> Ray<float>;

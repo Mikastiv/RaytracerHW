@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Color.hpp"
+#include "Config.hpp"
 
 #include <memory>
 #include <string_view>
@@ -15,7 +16,7 @@ public:
     auto Clear(Color c) -> void;
 
 private:
-    uint32_t mWidth = 0;
-    uint32_t mHeight = 0;
+    uint32_t mWidth{ Config::DefaultWidth };
+    uint32_t mHeight{ Config::DefaultHeight };
     std::unique_ptr<Color[]> pImage = nullptr;
 };

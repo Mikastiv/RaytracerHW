@@ -41,6 +41,10 @@ public:
     {
         return (float)mB / 255.0f;
     }
+    constexpr auto GetRGB() const noexcept -> std::tuple<uint8_t, uint8_t, uint8_t>
+    {
+        return { GetR(), GetG(), GetB() };
+    }
     constexpr auto GetRGBNorm() const noexcept -> std::tuple<float, float, float>
     {
         return { GetRNorm(), GetGNorm(), GetBNorm() };
@@ -62,5 +66,4 @@ private:
     uint8_t mR = 0;
     uint8_t mG = 0;
     uint8_t mB = 0;
-
 };

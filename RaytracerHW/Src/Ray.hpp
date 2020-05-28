@@ -6,7 +6,6 @@ template <typename T>
 class Ray
 {
 public:
-    Ray() = default;
     Ray(Point<T> pos, Vec3<T> dir)
         : mPos(pos)
         , mDir(dir)
