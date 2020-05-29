@@ -23,7 +23,7 @@ auto Camera::GenerateRay(std::pair<uint32_t, uint32_t> screenPixel) -> Ray<float
     const float halfHeight = mHeight / 2.0f;
     const float fovyRad = Radians(mFovy);
     const float fovx = tan(fovyRad / 2.0f) * mAspect;
-    const float alpha = tan(fovx / 2.0f) * ((((float)x + 0.5f) - halfWidth) / halfWidth) * mAspect * 1.5f;
+    const float alpha = tan(fovx / 2.0f) * ((((float)x + 0.5f) - halfWidth) / halfWidth) * 2.0f;
     const float beta = tan(fovyRad / 2.0f) * ((halfHeight - ((float)y + 0.5f)) / halfHeight);
 
     const auto dir = ((mU * alpha) + (mV * beta) - mW).Normalize();

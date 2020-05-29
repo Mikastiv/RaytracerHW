@@ -16,11 +16,11 @@ auto Scene::Render() -> void
         const auto [x, y] = *pixel;
 
         const auto center = Point<float>{ 0.0f, 0.0f, 0.0f };
-        const float radius = 1.0f;
+        const float radius = 0.5f;
         const auto oc = ray.mOrigin - center;
-        const float a = ray.mDir.Dot(ray.mDir);
+        const float a = Dot(ray.mDir, ray.mDir);
         const float b = 2.0f * Dot(ray.mDir, oc);
-        const float c = Dot(oc, oc)-(radius * radius);
+        const float c = Dot(oc, oc) - (radius * radius);
 
         const float discriminant = (b * b) - (4 * a * c);
 
