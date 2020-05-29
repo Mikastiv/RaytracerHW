@@ -1,18 +1,18 @@
 #pragma once
 
-#include "LocalGeo.hpp"
 #include "Primitive.hpp"
+#include "LocalGeo.hpp"
 
 struct Intersection
 {
 public:
-    Intersection(LocalGeo localGeo, Primitive* primitive)
-        : mLocalGeo(std::move(localGeo))
-        , mPrimitive(primitive)
+    Intersection(Primitive& primitive, LocalGeo localGeo)
+        : mPrimitive(primitive)
+        , mLocalGeo(std::move(localGeo))
     {
     }
 
 public:
+    Primitive& mPrimitive;
     LocalGeo mLocalGeo;
-    Primitive* mPrimitive = nullptr;
 };
