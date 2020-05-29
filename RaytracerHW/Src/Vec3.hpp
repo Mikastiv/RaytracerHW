@@ -74,6 +74,10 @@ public:
     {
         return { y * other.z - z * other.y, z * other.x - x * other.z, x * other.y - y * other.x };
     }
+    constexpr auto Dot(const Vec3& other) const -> T
+    {
+        return static_cast<T>(x * other.x + y * other.y + z * other.z);
+    }
 
 public:
     T x = static_cast<T>(0);
@@ -86,18 +90,25 @@ using Vec3f = Vec3<float>;
 template <typename T>
 inline auto Normalize(const Vec3<T>& vec) -> Vec3<T>
 {
-    const auto len = vec.Length();
-    return { vec.x / len, vec.y / len, vec.z / len };
+    auto newVec = Vec3<T>{ vec };
+    newVec.Normalize();
+    return newVec;
+}
+
+template <typename T>
+inline auto Cross(const Vec3<T>& v1, const Vec3<T>& v2) -> Vec3<T>
+{
+    return v1.Cross(v2);
+}
+
+template <typename T>
+inline auto Dot(const Vec3<T>& v1, const Vec3<T>& v2) -> T
+{
+    return v1.Dot(v2);
 }
 
 template <typename T>
 inline auto operator*(const T& lhs, const Vec3<T>& rhs) -> Vec3<T>
 {
-    return Vec3{ rhs } * lhs;
-}
-
-template <typename T>
-inline auto operator/(const T& lhs, const Vec3<T>& rhs) -> Vec3<T>
-{
-    return Vec3{ rhs } / lhs;
+    return rhs * lhs;
 }
