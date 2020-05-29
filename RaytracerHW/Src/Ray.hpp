@@ -2,13 +2,15 @@
 
 #include "Point.hpp"
 
+#include <utility>
+
 template <typename T>
-class Ray
+struct Ray
 {
 public:
-    Ray(Point<T> pos, Vec3<T> dir)
-        : mOrigin(pos)
-        , mDir(dir)
+    constexpr Ray(Point<T> pos, Vec3<T> dir)
+        : mOrigin(std::move(pos))
+        , mDir(std::move(dir))
     {
     }
 

@@ -94,6 +94,7 @@
     <ClInclude Include="Src\Color.hpp" />
     <ClInclude Include="Src\Config.hpp" />
     <ClInclude Include="Src\Image.hpp" />
+    <ClInclude Include="Src\LocalGeo.hpp" />
     <ClInclude Include="Src\Parser.hpp" />
     <ClInclude Include="Src\Point.hpp" />
     <ClInclude Include="Src\Ray.hpp" />
