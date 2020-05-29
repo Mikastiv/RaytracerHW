@@ -1,5 +1,7 @@
 #include "Camera.hpp"
 
+#include "Utils.hpp"
+
 Camera::Camera(uint32_t width, uint32_t height, float fovy, Point<float> eye, Point<float> lookAt, Vec3f up)
     : mWidth(width)
     , mHeight(height)
@@ -8,26 +10,23 @@ Camera::Camera(uint32_t width, uint32_t height, float fovy, Point<float> eye, Po
     , mEyePos(std::move(eye))
     , mLookAt(std::move(lookAt))
     , mUp(std::move(up))
+    , mW((mEyePos - mLookAt).Normalize())
+    , mU(mUp.Cross(mW).Normalize())
+    , mV(mW.Cross(mU))
 {
 }
 
 auto Camera::GenerateRay(std::pair<uint32_t, uint32_t> screenPixel) -> Ray<float>
 {
-    const auto w = (mEyePos - mLookAt).Normalize();
-    const auto u = mUp.Cross(w).Normalize();
-    const auto v = w.Cross(u);
-
     const auto [x, y] = screenPixel;
-    const auto halfWidth = mWidth / 2.0f;
-    const auto halfHeight = mHeight / 2.0f;
-    const auto tanFovy = tan(mFovy / 2.0f);
-    const auto alpha = tanFovy * mAspect * ((((float)y + 0.5f) - halfWidth) / halfWidth);
-    const auto beta = tanFovy * ((halfHeight - ((float)x + 0.5f)) / halfHeight);
-    // const auto fovx = 2.0f * atan(tan(mFovy / 2.0f) * mAspect);
-    // const auto alpha = tan(fovx / 2.0f) * (((y + 0.5f) - halfWidth) / halfWidth);
-    // const auto beta = tanFovy * ((halfHeight - (x + 0.5f)) / halfHeight);
+    const float halfWidth = mWidth / 2.0f;
+    const float halfHeight = mHeight / 2.0f;
+    const float fovyRad = Radians(mFovy);
+    const float fovx = tan(fovyRad / 2.0f) * mAspect;
+    const float alpha = tan(fovx / 2.0f) * ((((float)x + 0.5f) - halfWidth) / halfWidth) * mAspect * 1.5f;
+    const float beta = tan(fovyRad / 2.0f) * ((halfHeight - ((float)y + 0.5f)) / halfHeight);
 
-    const auto dir = ((alpha * u) + (beta * v) - w).Normalize();
+    const auto dir = ((mU * alpha) + (mV * beta) - mW).Normalize();
 
     return Ray<float>(mEyePos, dir);
 }

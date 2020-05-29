@@ -7,12 +7,12 @@ class Ray
 {
 public:
     Ray(Point<T> pos, Vec3<T> dir)
-        : mPos(pos)
+        : mOrigin(pos)
         , mDir(dir)
     {
     }
 
 public:
-    Point<T> mPos{};
+    Point<T> mOrigin{};
     Vec3<T> mDir{};
 };

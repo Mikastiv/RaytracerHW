@@ -23,4 +23,7 @@ private:
     Point<float> mEyePos{ Config::DefaultEyePos };
     Point<float> mLookAt{ Config::DefaultLookAt };
     Vec3f mUp{ Config::DefaultUp };
+    Vec3f mW{};
+    Vec3f mU{};
+    Vec3f mV{};
 };
