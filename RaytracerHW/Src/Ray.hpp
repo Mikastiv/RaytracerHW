@@ -15,6 +15,6 @@ public:
     }
 
 public:
-    Point<T> mOrigin{};
-    Vec3<T> mDir{};
+    Point<T> mOrigin;
+    Vec3<T> mDir;
 };

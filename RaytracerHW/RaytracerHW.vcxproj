@@ -88,6 +88,7 @@
     <ClCompile Include="Src\Sampler.cpp" />
     <ClCompile Include="Src\Scene.cpp" />
     <ClCompile Include="Src\SceneConfig.cpp" />
+    <ClCompile Include="Src\Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Camera.hpp" />
@@ -103,6 +104,8 @@
     <ClInclude Include="Src\Sampler.hpp" />
     <ClInclude Include="Src\Scene.hpp" />
     <ClInclude Include="Src\SceneConfig.hpp" />
+    <ClInclude Include="Src\Shape.hpp" />
+    <ClInclude Include="Src\Sphere.hpp" />
     <ClInclude Include="Src\Utils.hpp" />
     <ClInclude Include="Src\Vec3.hpp" />
   </ItemGroup>

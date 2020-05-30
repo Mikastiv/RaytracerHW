@@ -6,6 +6,7 @@
 class SceneConfig
 {
 public:
+    SceneConfig() = default;
     SceneConfig(const std::vector<Config>& configs);
 
     auto GetWidth() const noexcept -> uint32_t;

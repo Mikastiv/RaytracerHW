@@ -16,14 +16,15 @@ public:
     auto Height() const -> uint32_t;
 
 private:
-    uint32_t mWidth{ Config::DefaultWidth };
-    uint32_t mHeight{ Config::DefaultHeight };
-    float mFovy{ Config::DefaultFovy };
-    float mAspect = (float)mWidth / (float)mHeight;
-    Point<float> mEyePos{ Config::DefaultEyePos };
-    Point<float> mLookAt{ Config::DefaultLookAt };
-    Vec3f mUp{ Config::DefaultUp };
-    Vec3f mW{};
-    Vec3f mU{};
-    Vec3f mV{};
+    uint32_t mWidth;
+    uint32_t mHeight;
+    float mFovy;
+    float mAspect;
+    Point<float> mEyePos;
+    Point<float> mLookAt;
+    Vec3f mUp;
+    // Order is important here
+    Vec3f mW;
+    Vec3f mU;
+    Vec3f mV;
 };

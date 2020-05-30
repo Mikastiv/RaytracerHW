@@ -90,6 +90,6 @@ public:
     auto GetParams() const -> const std::vector<std::variant<float, std::string>>&;
 
 private:
-    Type mType{};
-    std::vector<std::variant<float, std::string>> mParameters{};
+    Type mType;
+    std::vector<std::variant<float, std::string>> mParameters;
 };

@@ -16,7 +16,7 @@ public:
     auto Clear(Color c) -> void;
 
 private:
-    uint32_t mWidth{ Config::DefaultWidth };
-    uint32_t mHeight{ Config::DefaultHeight };
-    std::unique_ptr<Color[]> pImage = nullptr;
+    uint32_t mWidth;
+    uint32_t mHeight;
+    std::unique_ptr<Color[]> pImage;
 };
