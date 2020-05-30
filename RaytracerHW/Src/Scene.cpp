@@ -1,5 +1,7 @@
 #include "Scene.hpp"
 
+#include "Sphere.hpp"
+
 Scene::Scene(const SceneConfig& c)
     : mSampler(c.GetWidth(), c.GetHeight())
     , mCamera(c.GetWidth(), c.GetHeight(), c.GetFovy(), c.GetEyePos(), c.GetLookAt(), c.GetUp())
@@ -10,27 +12,15 @@ Scene::Scene(const SceneConfig& c)
 
 auto Scene::Render() -> void
 {
+    Sphere sphere{ {0,0,0}, 0.75f };
     while (const auto pixel = mSampler.Sample())
     {
         const auto ray = mCamera.GenerateRay(*pixel);
         const auto [x, y] = *pixel;
-
-        const auto center = Point<float>{ 0.0f, 0.0f, 0.0f };
-        const float radius = 0.5f;
         
+        const auto i = sphere.Intersect(ray);
 
-        Color col{ 0, 0, 0 };
-
-        if (!(discriminant < 0.0f))
-        {
-            const float sqDisc = sqrtf(discriminant);
-            const float solution1 = (-b + sqDisc) / (2 * a);
-            const float solution2 = (-b - sqDisc) / (2 * a);
-
-            col = { 255, 0, 0 };
-        }
-
-        mImage.PutPixel(x, y, col);
+        mImage.PutPixel(x, y, i ? Color{ 255, 255, 0 } : Color{ 0, 0, 0 });
     }
 
     mImage.Save(mOutputFile);
