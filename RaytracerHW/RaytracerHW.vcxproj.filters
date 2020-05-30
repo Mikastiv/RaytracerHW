@@ -86,13 +86,13 @@
     <ClInclude Include="Src\Intersection.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Primitive.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Shape.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\Sphere.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Material.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

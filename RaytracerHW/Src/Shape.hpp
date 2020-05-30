@@ -1,13 +1,25 @@
 #pragma once
 
-#include "LocalGeo.hpp"
+#include "Intersection.hpp"
 #include "Ray.hpp"
+#include "Material.hpp"
 
 #include <optional>
-#include <tuple>
 
 class Shape
 {
 public:
-    virtual auto Intersect(const Ray<float>& ray) const -> std::optional<LocalGeo> = 0;
+    Shape(Material material)
+        : mMaterial(material)
+    {
+    }
+
+    virtual auto Intersect(const Ray<float>& ray) const -> std::optional<Intersection> = 0;
+    auto GetMaterial() const -> const Material&
+    {
+        return mMaterial;
+    }
+
+private:
+    Material mMaterial;
 };

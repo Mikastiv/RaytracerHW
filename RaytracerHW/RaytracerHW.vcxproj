@@ -97,9 +97,9 @@
     <ClInclude Include="Src\Image.hpp" />
     <ClInclude Include="Src\Intersection.hpp" />
     <ClInclude Include="Src\LocalGeo.hpp" />
+    <ClInclude Include="Src\Material.hpp" />
     <ClInclude Include="Src\Parser.hpp" />
     <ClInclude Include="Src\Point.hpp" />
-    <ClInclude Include="Src\Primitive.hpp" />
     <ClInclude Include="Src\Ray.hpp" />
     <ClInclude Include="Src\Sampler.hpp" />
     <ClInclude Include="Src\Scene.hpp" />

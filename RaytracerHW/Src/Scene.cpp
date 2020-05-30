@@ -12,12 +12,12 @@ Scene::Scene(const SceneConfig& c)
 
 auto Scene::Render() -> void
 {
-    Sphere sphere{ {0,0,0}, 0.75f };
+    Sphere sphere{ Material{ {}, {}, {}, {} }, { 0, 0, 0 }, 0.75f };
     while (const auto pixel = mSampler.Sample())
     {
         const auto ray = mCamera.GenerateRay(*pixel);
         const auto [x, y] = *pixel;
-        
+
         const auto i = sphere.Intersect(ray);
 
         mImage.PutPixel(x, y, i ? Color{ 255, 255, 0 } : Color{ 0, 0, 0 });

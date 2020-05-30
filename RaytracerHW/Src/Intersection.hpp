@@ -1,18 +1,19 @@
 #pragma once
 
-#include "Primitive.hpp"
 #include "LocalGeo.hpp"
+
+class Shape;
 
 struct Intersection
 {
 public:
-    Intersection(Primitive& primitive, LocalGeo localGeo)
-        : mPrimitive(primitive)
+    Intersection(const Shape& shape, LocalGeo localGeo)
+        : mShape(shape)
         , mLocalGeo(std::move(localGeo))
     {
     }
 
 public:
-    Primitive& mPrimitive;
+    const Shape& mShape;
     LocalGeo mLocalGeo;
 };

@@ -2,14 +2,16 @@
 
 #include <algorithm>
 #include <cmath>
+#include <tuple>
 
-Sphere::Sphere(Point<float> center, float radius)
-    : mCenter(std::move(center))
+Sphere::Sphere(Material material, Point<float> center, float radius)
+    : Shape(material)
+    , mCenter(std::move(center))
     , mRadius(radius)
 {
 }
 
-auto Sphere::Intersect(const Ray<float>& ray) const -> std::optional<LocalGeo>
+auto Sphere::Intersect(const Ray<float>& ray) const -> std::optional<Intersection>
 {
     const auto [a, b, c, disc] = GetABCDiscriminant(ray);
 
@@ -33,9 +35,9 @@ auto Sphere::Intersect(const Ray<float>& ray) const -> std::optional<LocalGeo>
     {
         t = t1;
     }
-    
+
     const auto intersectPoint = ray.mOrigin + ray.mDir * t;
-    return LocalGeo{ intersectPoint, intersectPoint - mCenter, t1 };
+    return Intersection{ *this, { intersectPoint, intersectPoint - mCenter, t1 } };
 }
 
 auto Sphere::GetABCDiscriminant(const Ray<float>& ray) const -> std::tuple<float, float, float, float>

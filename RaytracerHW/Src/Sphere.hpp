@@ -5,9 +5,9 @@
 class Sphere : public Shape
 {
 public:
-    Sphere(Point<float> center, float radius);
+    Sphere(Material material, Point<float> center, float radius);
 
-    auto Intersect(const Ray<float>& ray) const -> std::optional<LocalGeo> override;
+    auto Intersect(const Ray<float>& ray) const -> std::optional<Intersection> override;
 
 private:
     auto GetABCDiscriminant(const Ray<float>& ray) const -> std::tuple<float, float, float, float>;
