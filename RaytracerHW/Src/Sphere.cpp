@@ -37,7 +37,7 @@ auto Sphere::Intersect(const Ray<float>& ray) const -> std::optional<Intersectio
     }
 
     const auto intersectPoint = ray.mOrigin + ray.mDir * t;
-    return Intersection{ *this, { intersectPoint, intersectPoint - mCenter, t1 } };
+    return Intersection{ *this, { intersectPoint, intersectPoint - mCenter, t } };
 }
 
 auto Sphere::GetABCDiscriminant(const Ray<float>& ray) const -> std::tuple<float, float, float, float>

@@ -39,6 +39,7 @@ public:
 
 public:
     // clang-format off
+    static constexpr float Epsilon = 0.000001f;
 
     // Command Tokens
     static constexpr std::string_view SizeToken             = "size";
