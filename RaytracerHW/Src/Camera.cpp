@@ -2,7 +2,7 @@
 
 #include "Utils.hpp"
 
-Camera::Camera(uint32_t width, uint32_t height, float fovy, Point<float> eye, Point<float> lookAt, Vec3f up)
+Camera::Camera(uint32_t width, uint32_t height, float fovy, Vec3f eye, Vec3f lookAt, Vec3f up)
     : mWidth(width)
     , mHeight(height)
     , mFovy(fovy)

@@ -43,10 +43,8 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
             if (params.size() != Config::CameraParamCount)
                 ThrowException(Config::CameraToken);
 
-            mEyePos =
-                Point<float>{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
-            mLookAt =
-                Point<float>{ std::get<float>(params[3]), std::get<float>(params[4]), std::get<float>(params[5]) };
+            mEyePos = Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
+            mLookAt = Vec3f{ std::get<float>(params[3]), std::get<float>(params[4]), std::get<float>(params[5]) };
             mUp = Vec3f{ std::get<float>(params[6]), std::get<float>(params[7]), std::get<float>(params[8]) };
             mUp.Normalize();
             mFovy = std::get<float>(params[9]);
@@ -78,12 +76,12 @@ auto SceneConfig::GetFilename() const noexcept -> std::string
     return mFilename;
 }
 
-auto SceneConfig::GetEyePos() const noexcept -> Point<float>
+auto SceneConfig::GetEyePos() const noexcept -> Vec3f
 {
     return mEyePos;
 }
 
-auto SceneConfig::GetLookAt() const noexcept -> Point<float>
+auto SceneConfig::GetLookAt() const noexcept -> Vec3f
 {
     return mLookAt;
 }

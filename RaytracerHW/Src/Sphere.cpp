@@ -4,7 +4,7 @@
 #include <cmath>
 #include <tuple>
 
-Sphere::Sphere(Material material, Point<float> center, float radius)
+Sphere::Sphere(Material material, Vec3f center, float radius)
     : Shape(material)
     , mCenter(std::move(center))
     , mRadius(radius)

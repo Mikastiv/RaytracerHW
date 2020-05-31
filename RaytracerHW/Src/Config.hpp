@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Point.hpp"
+#include "Vec3.hpp"
 
 #include <vector>
 #include <string>
@@ -78,8 +78,8 @@ public:
     static constexpr uint32_t DefaultWidth = 640;
     static constexpr uint32_t DefaultHeight = 480;
     static constexpr uint32_t DefaultMaxRayDepth = 5;
-    static constexpr Point<float> DefaultEyePos = { 0.0f, 0.0f, 0.0f };
-    static constexpr Point<float> DefaultLookAt = { 0.0f, 0.0f, 1.0f };
+    static constexpr Vec3f DefaultEyePos = { 0.0f, 0.0f, 0.0f };
+    static constexpr Vec3f DefaultLookAt = { 0.0f, 0.0f, 1.0f };
     static constexpr Vec3f DefaultUp = { 0.0f, 1.0f, 0.0f };
     static constexpr float DefaultFovy = 90.0f;
 

@@ -62,9 +62,6 @@
     <ClInclude Include="Src\Vec3.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Point.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Ray.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

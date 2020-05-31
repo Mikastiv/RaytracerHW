@@ -5,7 +5,7 @@
 class Sphere : public Shape
 {
 public:
-    Sphere(Material material, Point<float> center, float radius);
+    Sphere(Material material, Vec3f center, float radius);
 
     auto Intersect(const Ray<float>& ray) const -> std::optional<Intersection> override;
 
@@ -13,6 +13,6 @@ private:
     auto GetABCDiscriminant(const Ray<float>& ray) const -> std::tuple<float, float, float, float>;
 
 private:
-    Point<float> mCenter;
+    Vec3f mCenter;
     float mRadius;
 };

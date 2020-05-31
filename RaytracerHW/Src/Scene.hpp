@@ -4,7 +4,6 @@
 #include "Sampler.hpp"
 #include "Camera.hpp"
 #include "Image.hpp"
-#include "Point.hpp"
 
 #include <vector>
 
