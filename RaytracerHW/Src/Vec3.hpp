@@ -62,7 +62,7 @@ public:
     }
     auto Length() const -> T
     {
-        return sqrt(x * x + y * y + z * z);
+        return std::sqrt(x * x + y * y + z * z);
     }
     auto Normalize() -> Vec3&
     {

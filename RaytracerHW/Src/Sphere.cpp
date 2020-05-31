@@ -18,7 +18,7 @@ auto Sphere::Intersect(const Ray<float>& ray) const -> std::optional<Intersectio
     if (disc < 0.0f)
         return {};
 
-    const float sqDisc = sqrtf(disc);
+    const float sqDisc = std::sqrt(disc);
     const float t1 = (-b + sqDisc) / (2.0f * a);
     const float t2 = (-b - sqDisc) / (2.0f * a);
 
