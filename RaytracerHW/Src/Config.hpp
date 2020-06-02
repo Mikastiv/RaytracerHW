@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Vec3.hpp"
+#include "Material.hpp"
 
 #include <vector>
 #include <string>
@@ -71,18 +72,29 @@ public:
     // Command Param Count
     static constexpr uint8_t SizeParamCount = 2;
     static constexpr uint8_t MaxDepthParamCount = 1;
+    static constexpr uint8_t MaxVertexParamCount = 1;
+    static constexpr uint8_t MaxVertexNormalParamCount = 1;
     static constexpr uint8_t OutputParamCount = 1;
     static constexpr uint8_t CameraParamCount = 10;
+    static constexpr uint8_t SphereParamCount = 4;
+    static constexpr uint8_t VertexParamCount = 3;
+    static constexpr uint8_t VertexNormalParamCount = 3;
+    static constexpr uint8_t TriangleParamCount = 3;
 
     // Default Values
     static constexpr std::string_view DefaultOutputFile = "output.png";
     static constexpr uint32_t DefaultWidth = 640;
     static constexpr uint32_t DefaultHeight = 480;
     static constexpr uint32_t DefaultMaxRayDepth = 5;
+    static constexpr uint32_t DefaultMaxVertex = 256;
+    static constexpr uint32_t DefaultMaxVertexNorms = 256;
     static constexpr Vec3f DefaultEyePos = { 0.0f, 0.0f, 0.0f };
     static constexpr Vec3f DefaultLookAt = { 0.0f, 0.0f, 1.0f };
     static constexpr Vec3f DefaultUp = { 0.0f, 1.0f, 0.0f };
     static constexpr float DefaultFovy = 90.0f;
+    static constexpr Material DefaultMaterial = {
+        Color{ 0.4f, 0.4f, 0.4f }, Color{ 0.4f, 0.4f, 0.4f }, Color{ 0.1f, 0.1f, 0.1f }, Color{ 0.0f, 0.0f, 0.0f }, 50u
+    };
 
 public:
     Config(Type type, std::vector<std::variant<float, std::string>> params);

@@ -17,6 +17,12 @@ public:
         , mB(b)
     {
     }
+    constexpr Color(float r, float g, float b) noexcept
+        : mR(uint8_t(r * 255.0f))
+        , mG(uint8_t(g * 255.0f))
+        , mB(uint8_t(b * 255.0f))
+    {
+    }
     constexpr auto GetR() const noexcept -> uint8_t
     {
         return mR;

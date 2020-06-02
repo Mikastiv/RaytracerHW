@@ -8,22 +8,27 @@ Scene::Scene(const SceneConfig& c)
     , mCamera(c.GetWidth(), c.GetHeight(), c.GetFovy(), c.GetEyePos(), c.GetLookAt(), c.GetUp())
     , mImage(c.GetWidth(), c.GetHeight())
     , mOutputFile(c.GetFilename())
+    , mShapes(c.GetShapes())
 {
 }
 
 auto Scene::Render() -> void
 {
-    // Sphere sphere{ Material{ {}, {}, {}, {} }, { 0, 0, 0 }, 0.75f };
-    Triangle t{ Material{ {}, {}, {}, {} }, { -0.5f, -0.5f, 0.0f }, { 0.5f, -0.5f, 0.0f }, { 0.0f, 0.5f, 0.0f } };
-
     while (const auto pixel = mSampler.Sample())
     {
         const auto ray = mCamera.GenerateRay(*pixel);
         const auto [x, y] = *pixel;
 
-        const auto i = t.Intersect(ray);
+        Color c{};
+        for (const auto& s : mShapes)
+        {
+            const auto i = s->Intersect(ray);
 
-        mImage.PutPixel(x, y, i ? Color{ 255, 255, 0 } : Color{ 0, 0, 0 });
+            if (i)
+                c = Color{ (uint8_t)255, (uint8_t)255, (uint8_t)0 };
+        }
+
+        mImage.PutPixel(x, y, c);
     }
 
     mImage.Save(mOutputFile);
