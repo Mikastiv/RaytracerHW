@@ -97,12 +97,14 @@ public:
     };
 
 public:
-    Config(Type type, std::vector<std::variant<float, std::string>> params);
+    Config(Type type, std::vector<std::variant<float, std::string>> params, uint32_t line);
 
     auto GetType() const -> Type;
     auto GetParams() const -> const std::vector<std::variant<float, std::string>>&;
+    auto GetLineNumber() const -> uint32_t;
 
 private:
     Type mType;
     std::vector<std::variant<float, std::string>> mParameters;
+    uint32_t mLine;
 };

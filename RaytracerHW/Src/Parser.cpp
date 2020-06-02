@@ -40,99 +40,99 @@ auto Parser::ParseFile(std::string_view file) -> std::vector<Config>
                 {
                     if (token == Config::SizeToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::Size, values));
+                        configs.push_back(ExtractParams(Config::Type::Size, values, i));
                     }
                     else if (token == Config::MaxDepthToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::MaxDepth, values));
+                        configs.push_back(ExtractParams(Config::Type::MaxDepth, values, i));
                     }
                     else if (token == Config::OutputToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::Output, values));
+                        configs.push_back(ExtractParams(Config::Type::Output, values, i));
                     }
                     else if (token == Config::CameraToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::Camera, values));
+                        configs.push_back(ExtractParams(Config::Type::Camera, values, i));
                     }
                     else if (token == Config::SphereToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::Sphere, values));
+                        configs.push_back(ExtractParams(Config::Type::Sphere, values, i));
                     }
                     else if (token == Config::MaxVertexToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::MaxVertex, values));
+                        configs.push_back(ExtractParams(Config::Type::MaxVertex, values, i));
                     }
                     else if (token == Config::MaxVertexNormalToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::MaxVertexNorms, values));
+                        configs.push_back(ExtractParams(Config::Type::MaxVertexNorms, values, i));
                     }
                     else if (token == Config::VertexToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::Vertex, values));
+                        configs.push_back(ExtractParams(Config::Type::Vertex, values, i));
                     }
                     else if (token == Config::VertexNormalToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::VertexNormal, values));
+                        configs.push_back(ExtractParams(Config::Type::VertexNormal, values, i));
                     }
                     else if (token == Config::TriangleToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::Triangle, values));
+                        configs.push_back(ExtractParams(Config::Type::Triangle, values, i));
                     }
                     else if (token == Config::TriangleNormalToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::TriangleNormal, values));
+                        configs.push_back(ExtractParams(Config::Type::TriangleNormal, values, i));
                     }
                     else if (token == Config::TranslateToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::Translate, values));
+                        configs.push_back(ExtractParams(Config::Type::Translate, values, i));
                     }
                     else if (token == Config::RotateToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::Rotate, values));
+                        configs.push_back(ExtractParams(Config::Type::Rotate, values, i));
                     }
                     else if (token == Config::ScaleToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::Scale, values));
+                        configs.push_back(ExtractParams(Config::Type::Scale, values, i));
                     }
                     else if (token == Config::PushTransformToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::PushTransform, values));
+                        configs.push_back(ExtractParams(Config::Type::PushTransform, values, i));
                     }
                     else if (token == Config::PopTransformToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::PopTransform, values));
+                        configs.push_back(ExtractParams(Config::Type::PopTransform, values, i));
                     }
                     else if (token == Config::DirectionalToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::Directional, values));
+                        configs.push_back(ExtractParams(Config::Type::Directional, values, i));
                     }
                     else if (token == Config::PointToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::Point, values));
+                        configs.push_back(ExtractParams(Config::Type::Point, values, i));
                     }
                     else if (token == Config::AttenuationToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::Attenuation, values));
+                        configs.push_back(ExtractParams(Config::Type::Attenuation, values, i));
                     }
                     else if (token == Config::AmbientToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::Ambient, values));
+                        configs.push_back(ExtractParams(Config::Type::Ambient, values, i));
                     }
                     else if (token == Config::DiffuseToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::Diffuse, values));
+                        configs.push_back(ExtractParams(Config::Type::Diffuse, values, i));
                     }
                     else if (token == Config::SpecularToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::Specular, values));
+                        configs.push_back(ExtractParams(Config::Type::Specular, values, i));
                     }
                     else if (token == Config::ShininessToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::Shininess, values));
+                        configs.push_back(ExtractParams(Config::Type::Shininess, values, i));
                     }
                     else if (token == Config::EmissionToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::Emission, values));
+                        configs.push_back(ExtractParams(Config::Type::Emission, values, i));
                     }
                     else
                     {
@@ -143,8 +143,8 @@ auto Parser::ParseFile(std::string_view file) -> std::vector<Config>
                 {
                     const auto CreateErrorStr = [](std::string_view file, int lineNo) {
                         std::ostringstream error{};
-                        error << "Bad command token at line " << lineNo << ", [File] "
-                              << std::filesystem::absolute(file);
+                        error << "Bad command token at line " << lineNo
+                              << ", [File: " << std::filesystem::absolute(file) << ']';
 
                         return error.str();
                     };
@@ -169,7 +169,7 @@ auto Parser::ParseFile(std::string_view file) -> std::vector<Config>
     return configs;
 }
 
-auto Parser::ExtractParams(Config::Type type, std::string_view line) -> Config
+auto Parser::ExtractParams(Config::Type type, std::string_view line, uint32_t lineNumber) -> Config
 {
     std::istringstream ss(line.data());
 
@@ -187,5 +187,5 @@ auto Parser::ExtractParams(Config::Type type, std::string_view line) -> Config
         }
     }
 
-    return Config(type, std::move(params));
+    return Config(type, std::move(params), lineNumber);
 }

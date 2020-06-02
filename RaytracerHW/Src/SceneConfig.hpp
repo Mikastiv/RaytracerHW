@@ -23,7 +23,7 @@ public:
     auto GetShapes() const -> std::vector<std::shared_ptr<Shape>>;
 
 private:
-    auto ThrowParamCountException(std::string_view paramName) const -> void;
+    auto ThrowParamCountException(std::string_view paramName, uint32_t lineNumber) const -> void;
 
 private:
     uint32_t mWidth{ Config::DefaultWidth };

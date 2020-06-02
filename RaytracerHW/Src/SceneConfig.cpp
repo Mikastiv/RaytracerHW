@@ -19,7 +19,7 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
         case Type::Size:
         {
             if (params.size() != Config::SizeParamCount)
-                ThrowParamCountException(Config::SizeToken);
+                ThrowParamCountException(Config::SizeToken, c.GetLineNumber());
 
             mWidth = (uint32_t)std::get<float>(params[0]);
             mHeight = (uint32_t)std::get<float>(params[1]);
@@ -28,7 +28,7 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
         case Type::MaxDepth:
         {
             if (params.size() != Config::MaxDepthParamCount)
-                ThrowParamCountException(Config::MaxDepthToken);
+                ThrowParamCountException(Config::MaxDepthToken, c.GetLineNumber());
 
             mMaxRayDepth = (uint32_t)std::get<float>(params[0]);
             break;
@@ -36,7 +36,7 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
         case Type::MaxVertex:
         {
             if (params.size() != Config::MaxVertexParamCount)
-                ThrowParamCountException(Config::MaxVertexToken);
+                ThrowParamCountException(Config::MaxVertexToken, c.GetLineNumber());
 
             mMaxVertex = (uint32_t)std::get<float>(params[0]);
             break;
@@ -44,7 +44,7 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
         case Type::MaxVertexNorms:
         {
             if (params.size() != Config::MaxVertexNormalParamCount)
-                ThrowParamCountException(Config::MaxVertexNormalToken);
+                ThrowParamCountException(Config::MaxVertexNormalToken, c.GetLineNumber());
 
             mMaxVertexNormal = (uint32_t)std::get<float>(params[0]);
             break;
@@ -52,7 +52,7 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
         case Type::Output:
         {
             if (params.size() != Config::OutputParamCount)
-                ThrowParamCountException(Config::OutputToken);
+                ThrowParamCountException(Config::OutputToken, c.GetLineNumber());
 
             mFilename = std::get<std::string>(params[0]);
             break;
@@ -60,7 +60,7 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
         case Type::Camera:
         {
             if (params.size() != Config::CameraParamCount)
-                ThrowParamCountException(Config::CameraToken);
+                ThrowParamCountException(Config::CameraToken, c.GetLineNumber());
 
             mEyePos = Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
             mLookAt = Vec3f{ std::get<float>(params[3]), std::get<float>(params[4]), std::get<float>(params[5]) };
@@ -72,7 +72,7 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
         case Type::Sphere:
         {
             if (params.size() != Config::SphereParamCount)
-                ThrowParamCountException(Config::SphereToken);
+                ThrowParamCountException(Config::SphereToken, c.GetLineNumber());
 
             mShapes.push_back(std::make_shared<Sphere>(
                 mMaterial,
@@ -83,7 +83,10 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
         case Type::Vertex:
         {
             if (params.size() != Config::VertexParamCount)
-                ThrowParamCountException(Config::VertexToken);
+                ThrowParamCountException(Config::VertexToken, c.GetLineNumber());
+
+            if (mVertices.size() >= mMaxVertex)
+                throw std::runtime_error("Too many vertices (max vertex param exceeded)");
 
             mVertices.emplace_back(std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]));
             break;
@@ -91,7 +94,7 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
         case Type::VertexNormal:
         {
             if (params.size() != Config::VertexNormalParamCount)
-                ThrowParamCountException(Config::VertexNormalToken);
+                ThrowParamCountException(Config::VertexNormalToken, c.GetLineNumber());
 
             mNormals.emplace_back(std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]));
             break;
@@ -99,7 +102,7 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
         case Type::Triangle:
         {
             if (params.size() != Config::TriangleParamCount)
-                ThrowParamCountException(Config::TriangleToken);
+                ThrowParamCountException(Config::TriangleToken, c.GetLineNumber());
 
             mShapes.push_back(std::make_shared<Triangle>(
                 mMaterial,
@@ -159,9 +162,9 @@ auto SceneConfig::GetShapes() const -> std::vector<std::shared_ptr<Shape>>
     return mShapes;
 }
 
-auto SceneConfig::ThrowParamCountException(std::string_view paramName) const -> void
+auto SceneConfig::ThrowParamCountException(std::string_view paramName, uint32_t lineNumber) const -> void
 {
     std::ostringstream oss{};
-    oss << "Bad number of parameters for " << paramName;
+    oss << "Bad number of parameters for " << paramName << " [Line: " << lineNumber << ']';
     throw std::runtime_error(oss.str().c_str());
 }
