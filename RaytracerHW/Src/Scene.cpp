@@ -8,7 +8,7 @@ Scene::Scene(const SceneConfig& c)
     , mCamera(c.GetWidth(), c.GetHeight(), c.GetFovy(), c.GetEyePos(), c.GetLookAt(), c.GetUp())
     , mImage(c.GetWidth(), c.GetHeight())
     , mOutputFile(c.GetFilename())
-    , mShapes(c.GetShapes())
+    , mRaytracer(c.GetShapes())
 {
 }
 
@@ -19,14 +19,7 @@ auto Scene::Render() -> void
         const auto ray = mCamera.GenerateRay(*pixel);
         const auto [x, y] = *pixel;
 
-        Color c{};
-        for (const auto& s : mShapes)
-        {
-            const auto i = s->Intersect(ray);
-
-            if (i)
-                c = Color{ (uint8_t)255, (uint8_t)255, (uint8_t)0 };
-        }
+        Color c = mRaytracer.Intersect(ray);
 
         mImage.PutPixel(x, y, c);
     }

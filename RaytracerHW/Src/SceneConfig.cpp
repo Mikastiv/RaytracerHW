@@ -74,7 +74,7 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
             if (params.size() != Config::SphereParamCount)
                 ThrowParamCountException(Config::SphereToken, c.GetLineNumber());
 
-            mShapes.push_back(std::make_shared<Sphere>(
+            mShapes.push_back(std::make_unique<Sphere>(
                 mMaterial,
                 Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) },
                 std::get<float>(params[3])));
@@ -96,6 +96,9 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
             if (params.size() != Config::VertexNormalParamCount)
                 ThrowParamCountException(Config::VertexNormalToken, c.GetLineNumber());
 
+            if (mNormals.size() >= mMaxVertexNormal)
+                throw std::runtime_error("Too many normals (max vertex normal param exceeded)");
+
             mNormals.emplace_back(std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]));
             break;
         }
@@ -104,7 +107,7 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
             if (params.size() != Config::TriangleParamCount)
                 ThrowParamCountException(Config::TriangleToken, c.GetLineNumber());
 
-            mShapes.push_back(std::make_shared<Triangle>(
+            mShapes.push_back(std::make_unique<Triangle>(
                 mMaterial,
                 mVertices[(size_t)std::get<float>(params[0])],
                 mVertices[(size_t)std::get<float>(params[1])],

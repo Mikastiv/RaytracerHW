@@ -85,6 +85,7 @@
     <ClCompile Include="Src\Image.cpp" />
     <ClCompile Include="Src\Main.cpp" />
     <ClCompile Include="Src\Parser.cpp" />
+    <ClCompile Include="Src\Raytracer.cpp" />
     <ClCompile Include="Src\Sampler.cpp" />
     <ClCompile Include="Src\Scene.cpp" />
     <ClCompile Include="Src\SceneConfig.cpp" />
@@ -101,6 +102,7 @@
     <ClInclude Include="Src\Material.hpp" />
     <ClInclude Include="Src\Parser.hpp" />
     <ClInclude Include="Src\Ray.hpp" />
+    <ClInclude Include="Src\Raytracer.hpp" />
     <ClInclude Include="Src\Sampler.hpp" />
     <ClInclude Include="Src\Scene.hpp" />
     <ClInclude Include="Src\SceneConfig.hpp" />

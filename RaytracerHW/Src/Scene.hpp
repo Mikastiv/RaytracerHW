@@ -4,6 +4,7 @@
 #include "Sampler.hpp"
 #include "Camera.hpp"
 #include "Image.hpp"
+#include "Raytracer.hpp"
 
 #include <vector>
 
@@ -19,5 +20,5 @@ private:
     Camera mCamera;
     Image mImage;
     std::string mOutputFile;
-    std::vector<std::shared_ptr<Shape>> mShapes;
+    Raytracer mRaytracer;
 };
