@@ -41,6 +41,8 @@ public:
 public:
     // clang-format off
     static constexpr float Epsilon = 0.000001f;
+    static constexpr float TMin = 0.0f;
+    static constexpr float TMax = 100000.0f;
 
     // Command Tokens
     static constexpr std::string_view SizeToken             = "size";

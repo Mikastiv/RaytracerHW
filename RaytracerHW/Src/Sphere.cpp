@@ -36,6 +36,9 @@ auto Sphere::Intersect(const Ray<float>& ray) const -> std::optional<Intersectio
         t = t1;
     }
 
+    if (t < ray.mTMin || t > ray.mTMax)
+        return {};
+
     const auto intersectPoint = ray.mOrigin + ray.mDir * t;
     return Intersection{ *this, { intersectPoint, intersectPoint - mCenter, t } };
 }

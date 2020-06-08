@@ -37,6 +37,9 @@ auto Triangle::Intersect(const Ray<float>& ray) const -> std::optional<Intersect
     if (t < Config::Epsilon)
         return {};
 
+    if (t < ray.mTMin || t > ray.mTMax)
+        return {};
+
     const Vec3f intersectPoint = ray.mOrigin + ray.mDir * t;
     const auto normal = Cross((mV2 - mV0), (mV1 - mV0)).Normalize();
 

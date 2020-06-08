@@ -98,6 +98,7 @@
     <ClInclude Include="Src\Config.hpp" />
     <ClInclude Include="Src\Image.hpp" />
     <ClInclude Include="Src\Intersection.hpp" />
+    <ClInclude Include="Src\Light.hpp" />
     <ClInclude Include="Src\LocalGeo.hpp" />
     <ClInclude Include="Src\Material.hpp" />
     <ClInclude Include="Src\Parser.hpp" />
