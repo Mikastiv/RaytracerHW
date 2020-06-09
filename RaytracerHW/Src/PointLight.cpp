@@ -8,5 +8,5 @@ PointLight::PointLight(Color color, Vec3f pos)
 
 auto PointLight::GenerateLightRay(const Vec3f& srcPos) const -> Ray<float>
 {
-    return {mPos, Normalize(mPos - srcPos)};
+    return {mPos, Normalize(srcPos - mPos)};
 }

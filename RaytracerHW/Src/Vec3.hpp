@@ -36,6 +36,10 @@ public:
     {
         return Vec3{ *this } -= rhs;
     }
+    constexpr auto operator-() const -> Vec3
+    {
+        return { -x, -y, -z };
+    }
     constexpr auto operator*=(const T& rhs) -> Vec3&
     {
         x *= rhs;

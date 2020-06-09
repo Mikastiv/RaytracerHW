@@ -5,7 +5,7 @@
 class DirectionalLight : public Light
 {
 public:
-    DirectionalLight(Color color, Vec3f pos);
+    DirectionalLight(Color color, Vec3f dir);
 
     auto GenerateLightRay(const Vec3f& srcPos) const -> Ray<float> override;
 
