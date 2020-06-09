@@ -82,9 +82,12 @@
   <ItemGroup>
     <ClCompile Include="Src\Camera.cpp" />
     <ClCompile Include="Src\Config.cpp" />
+    <ClCompile Include="Src\DirectionalLight.cpp" />
     <ClCompile Include="Src\Image.cpp" />
+    <ClCompile Include="Src\Light.cpp" />
     <ClCompile Include="Src\Main.cpp" />
     <ClCompile Include="Src\Parser.cpp" />
+    <ClCompile Include="Src\PointLight.cpp" />
     <ClCompile Include="Src\Raytracer.cpp" />
     <ClCompile Include="Src\Sampler.cpp" />
     <ClCompile Include="Src\Scene.cpp" />
@@ -96,12 +99,14 @@
     <ClInclude Include="Src\Camera.hpp" />
     <ClInclude Include="Src\Color.hpp" />
     <ClInclude Include="Src\Config.hpp" />
+    <ClInclude Include="Src\DirectionalLight.hpp" />
     <ClInclude Include="Src\Image.hpp" />
     <ClInclude Include="Src\Intersection.hpp" />
     <ClInclude Include="Src\Light.hpp" />
     <ClInclude Include="Src\LocalGeo.hpp" />
     <ClInclude Include="Src\Material.hpp" />
     <ClInclude Include="Src\Parser.hpp" />
+    <ClInclude Include="Src\PointLight.hpp" />
     <ClInclude Include="Src\Ray.hpp" />
     <ClInclude Include="Src\Raytracer.hpp" />
     <ClInclude Include="Src\Sampler.hpp" />
