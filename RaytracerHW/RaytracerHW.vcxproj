@@ -94,6 +94,7 @@
     <ClCompile Include="Src\SceneConfig.cpp" />
     <ClCompile Include="Src\Sphere.cpp" />
     <ClCompile Include="Src\Triangle.cpp" />
+    <ClCompile Include="Src\TriangleNormal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Camera.hpp" />
@@ -115,6 +116,7 @@
     <ClInclude Include="Src\Shape.hpp" />
     <ClInclude Include="Src\Sphere.hpp" />
     <ClInclude Include="Src\Triangle.hpp" />
+    <ClInclude Include="Src\TriangleNormal.hpp" />
     <ClInclude Include="Src\Utils.hpp" />
     <ClInclude Include="Src\Vec3.hpp" />
   </ItemGroup>

@@ -1,7 +1,7 @@
 #include "SceneConfig.hpp"
 
 #include "Sphere.hpp"
-#include "Triangle.hpp"
+#include "TriangleNormal.hpp"
 #include "DirectionalLight.hpp"
 #include "PointLight.hpp"
 
@@ -98,10 +98,13 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
             if (params.size() != Config::VertexNormalParamCount)
                 ThrowParamCountException(Config::VertexNormalToken, c.GetLineNumber());
 
-            if (mNormals.size() >= mMaxVertexNormal)
-                throw std::runtime_error("Too many normals (max vertex normal param exceeded)");
+            if (mVerticesNormals.size() >= mMaxVertexNormal)
+                throw std::runtime_error("Too many vertices with normals (max vertex normal param exceeded)");
 
-            mNormals.emplace_back(std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]));
+            mVerticesNormals.push_back(std::make_pair(
+                Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) },
+                Normalize(
+                    Vec3f{ std::get<float>(params[3]), std::get<float>(params[4]), std::get<float>(params[5]) })));
             break;
         }
         case Type::Triangle:
@@ -114,6 +117,18 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
                 mVertices[(size_t)std::get<float>(params[0])],
                 mVertices[(size_t)std::get<float>(params[1])],
                 mVertices[(size_t)std::get<float>(params[2])]));
+            break;
+        }
+        case Type::TriangleNormal:
+        {
+            if (params.size() != Config::TriangleParamCount)
+                ThrowParamCountException(Config::TriangleNormalToken, c.GetLineNumber());
+
+            mShapes.push_back(std::make_unique<TriangleNormal>(
+                mMaterial,
+                mVerticesNormals[(size_t)std::get<float>(params[0])],
+                mVerticesNormals[(size_t)std::get<float>(params[1])],
+                mVerticesNormals[(size_t)std::get<float>(params[2])]));
             break;
         }
         case Type::DirectionalLight:

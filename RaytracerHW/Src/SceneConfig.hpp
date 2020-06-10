@@ -40,7 +40,7 @@ private:
     float mFovy{ Config::DefaultFovy };
     Material mMaterial{ Config::DefaultMaterial };
     std::vector<Vec3f> mVertices{};
-    std::vector<Vec3f> mNormals{};
+    std::vector<std::pair<Vec3f, Vec3f>> mVerticesNormals{};
     std::vector<std::shared_ptr<Shape>> mShapes{};
     std::vector<std::shared_ptr<Light>> mLights{};
 };

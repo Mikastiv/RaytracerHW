@@ -62,7 +62,7 @@ public:
     static constexpr std::string_view PushTransformToken    = "pushtransform";
     static constexpr std::string_view PopTransformToken     = "poptransform";
     static constexpr std::string_view DirectionalLightToken = "directional";
-    static constexpr std::string_view PointLightToken            = "point";
+    static constexpr std::string_view PointLightToken       = "point";
     static constexpr std::string_view AttenuationToken      = "attenuation";
     static constexpr std::string_view AmbientToken          = "ambient";
     static constexpr std::string_view DiffuseToken          = "diffuse";
@@ -80,7 +80,7 @@ public:
     static constexpr uint8_t CameraParamCount = 10;
     static constexpr uint8_t SphereParamCount = 4;
     static constexpr uint8_t VertexParamCount = 3;
-    static constexpr uint8_t VertexNormalParamCount = 3;
+    static constexpr uint8_t VertexNormalParamCount = 6;
     static constexpr uint8_t TriangleParamCount = 3;
     static constexpr uint8_t LightParamCount = 6;
 

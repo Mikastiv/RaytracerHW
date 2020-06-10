@@ -9,7 +9,7 @@ public:
 
     auto Intersect(const Ray<float>& ray) const -> std::optional<Intersection> override;
 
-private:
+protected:
     Vec3f mV0;
     Vec3f mV1;
     Vec3f mV2;
