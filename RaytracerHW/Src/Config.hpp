@@ -28,8 +28,8 @@ public:
         Scale,
         PushTransform,
         PopTransform,
-        Directional,
-        Point,
+        DirectionalLight,
+        PointLight,
         Attenuation,
         Ambient,
         Diffuse,
@@ -61,8 +61,8 @@ public:
     static constexpr std::string_view ScaleToken            = "scale";
     static constexpr std::string_view PushTransformToken    = "pushtransform";
     static constexpr std::string_view PopTransformToken     = "poptransform";
-    static constexpr std::string_view DirectionalToken      = "directional";
-    static constexpr std::string_view PointToken            = "point";
+    static constexpr std::string_view DirectionalLightToken = "directional";
+    static constexpr std::string_view PointLightToken            = "point";
     static constexpr std::string_view AttenuationToken      = "attenuation";
     static constexpr std::string_view AmbientToken          = "ambient";
     static constexpr std::string_view DiffuseToken          = "diffuse";
@@ -82,6 +82,7 @@ public:
     static constexpr uint8_t VertexParamCount = 3;
     static constexpr uint8_t VertexNormalParamCount = 3;
     static constexpr uint8_t TriangleParamCount = 3;
+    static constexpr uint8_t LightParamCount = 6;
 
     // Default Values
     static constexpr std::string_view DefaultOutputFile = "output.png";

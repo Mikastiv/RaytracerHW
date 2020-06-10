@@ -102,13 +102,13 @@ auto Parser::ParseFile(std::string_view file) -> std::vector<Config>
                     {
                         configs.push_back(ExtractParams(Config::Type::PopTransform, values, i));
                     }
-                    else if (token == Config::DirectionalToken)
+                    else if (token == Config::DirectionalLightToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::Directional, values, i));
+                        configs.push_back(ExtractParams(Config::Type::DirectionalLight, values, i));
                     }
-                    else if (token == Config::PointToken)
+                    else if (token == Config::PointLightToken)
                     {
-                        configs.push_back(ExtractParams(Config::Type::Point, values, i));
+                        configs.push_back(ExtractParams(Config::Type::PointLight, values, i));
                     }
                     else if (token == Config::AttenuationToken)
                     {

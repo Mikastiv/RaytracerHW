@@ -2,6 +2,8 @@
 
 #include "Sphere.hpp"
 #include "Triangle.hpp"
+#include "DirectionalLight.hpp"
+#include "PointLight.hpp"
 
 #include <stdexcept>
 #include <sstream>
@@ -114,6 +116,26 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
                 mVertices[(size_t)std::get<float>(params[2])]));
             break;
         }
+        case Type::DirectionalLight:
+        {
+            if (params.size() != Config::LightParamCount)
+                ThrowParamCountException(Config::DirectionalLightToken, c.GetLineNumber());
+
+            mLights.push_back(std::make_unique<DirectionalLight>(
+                Color{ std::get<float>(params[3]), std::get<float>(params[4]), std::get<float>(params[5]) },
+                Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) }));
+            break;
+        }
+        case Type::PointLight:
+        {
+            if (params.size() != Config::LightParamCount)
+                ThrowParamCountException(Config::PointLightToken, c.GetLineNumber());
+
+            mLights.push_back(std::make_unique<PointLight>(
+                Color{ std::get<float>(params[3]), std::get<float>(params[4]), std::get<float>(params[5]) },
+                Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) }));
+            break;
+        }
         default:
             break;
         }
@@ -163,6 +185,11 @@ auto SceneConfig::GetFovy() const noexcept -> float
 auto SceneConfig::GetShapes() const -> std::vector<std::shared_ptr<Shape>>
 {
     return mShapes;
+}
+
+auto SceneConfig::GetLights() const -> std::vector<std::shared_ptr<Light>>
+{
+    return mLights;
 }
 
 auto SceneConfig::ThrowParamCountException(std::string_view paramName, uint32_t lineNumber) const -> void

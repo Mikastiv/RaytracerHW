@@ -3,6 +3,7 @@
 #include "Config.hpp"
 #include "Vec3.hpp"
 #include "Shape.hpp"
+#include "Light.hpp"
 
 #include <memory>
 
@@ -21,6 +22,7 @@ public:
     auto GetUp() const noexcept -> Vec3f;
     auto GetFovy() const noexcept -> float;
     auto GetShapes() const -> std::vector<std::shared_ptr<Shape>>;
+    auto GetLights() const -> std::vector<std::shared_ptr<Light>>;
 
 private:
     auto ThrowParamCountException(std::string_view paramName, uint32_t lineNumber) const -> void;
@@ -40,4 +42,5 @@ private:
     std::vector<Vec3f> mVertices{};
     std::vector<Vec3f> mNormals{};
     std::vector<std::shared_ptr<Shape>> mShapes{};
+    std::vector<std::shared_ptr<Light>> mLights{};
 };
