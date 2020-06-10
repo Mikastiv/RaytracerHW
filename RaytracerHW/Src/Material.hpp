@@ -5,7 +5,7 @@
 struct Material
 {
 public:
-    constexpr Material(Color kd, Color ks, Color ka, Color ke, uint32_t shininess)
+    constexpr Material(Color kd, Color ks, Color ka, Color ke, float shininess)
         : mKd(kd)
         , mKs(ks)
         , mKa(ka)
@@ -19,5 +19,5 @@ public:
     Color mKs;
     Color mKa;
     Color mKe;
-    uint32_t mShininess;
+    float mShininess;
 };

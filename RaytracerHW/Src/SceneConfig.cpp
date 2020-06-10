@@ -151,6 +151,46 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
                 Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) }));
             break;
         }
+        case Type::Ambient:
+        {
+            if (params.size() != Config::AmbientParamCount)
+                ThrowParamCountException(Config::AmbientToken, c.GetLineNumber());
+
+            mMaterial.mKa = Color{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
+            break;
+        }
+        case Type::Diffuse:
+        {
+            if (params.size() != Config::DiffuseParamCount)
+                ThrowParamCountException(Config::DiffuseToken, c.GetLineNumber());
+
+            mMaterial.mKd = Color{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
+            break;
+        }
+        case Type::Specular:
+        {
+            if (params.size() != Config::SpecularParamCount)
+                ThrowParamCountException(Config::SpecularToken, c.GetLineNumber());
+
+            mMaterial.mKs = Color{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
+            break;
+        }
+        case Type::Emission:
+        {
+            if (params.size() != Config::EmissionParamCount)
+                ThrowParamCountException(Config::EmissionToken, c.GetLineNumber());
+
+            mMaterial.mKe = Color{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
+            break;
+        }
+        case Type::Shininess:
+        {
+            if (params.size() != Config::ShininessParamCount)
+                ThrowParamCountException(Config::ShininessToken, c.GetLineNumber());
+
+            mMaterial.mShininess = std::get<float>(params[0]);
+            break;
+        }
         default:
             break;
         }

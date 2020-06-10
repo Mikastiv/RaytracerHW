@@ -83,6 +83,11 @@ public:
     static constexpr uint8_t VertexNormalParamCount = 6;
     static constexpr uint8_t TriangleParamCount = 3;
     static constexpr uint8_t LightParamCount = 6;
+    static constexpr uint8_t AmbientParamCount = 3;
+    static constexpr uint8_t DiffuseParamCount = 3;
+    static constexpr uint8_t SpecularParamCount = 3;
+    static constexpr uint8_t EmissionParamCount = 3;
+    static constexpr uint8_t ShininessParamCount = 1;
 
     // Default Values
     static constexpr std::string_view DefaultOutputFile = "output.png";
