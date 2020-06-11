@@ -28,14 +28,17 @@ auto Raytracer::Intersect(const Ray<float>& ray) const -> Color
 
     if (closestIntersection)
     {
+        Color c{};
         for (const auto& l : mLights)
         {
             const auto lightRay = l->GenerateLightRay(closestIntersection->mLocalGeo.mPos);
             if (std::any_of(
                     mShapes.cbegin(), mShapes.cend(), [&lightRay](const auto& s) { return s->Intersect(lightRay); }))
                 break;
+
+            // shading
         }
-        return Color{ 1.0f, 1.0f, 0.0f };
+        return c;
     }
 
     return Color{};

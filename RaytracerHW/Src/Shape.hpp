@@ -15,6 +15,10 @@ public:
     }
 
     virtual auto Intersect(const Ray<float>& ray) const -> std::optional<Intersection> = 0;
+    virtual auto Shade(
+        const Vec3f& lightDir, Color lightColor, const Vec3f& normal, const Vec3f& halfVec,
+        const Material& material) const -> Color = 0;
+
     auto GetMaterial() const -> const Material&
     {
         return mMaterial;

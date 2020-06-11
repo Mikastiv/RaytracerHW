@@ -21,7 +21,7 @@ AllowShortBlocksOnASingleLine: false
 #AlwaysBreakBeforeMultilineStrings: false
 AlwaysBreakTemplateDeclarations: true
 BinPackArguments: false
-BinPackParameters: false
+BinPackParameters: true
 #BreakBeforeBinaryOperators: None
 BreakBeforeBraces: Allman
 #BreakBeforeTernaryOperators: true
