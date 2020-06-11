@@ -8,7 +8,7 @@ Scene::Scene(const SceneConfig& c)
     , mCamera(c.GetWidth(), c.GetHeight(), c.GetFovy(), c.GetEyePos(), c.GetLookAt(), c.GetUp())
     , mImage(c.GetWidth(), c.GetHeight())
     , mOutputFile(c.GetFilename())
-    , mRaytracer(c.GetShapes())
+    , mRaytracer(c.GetShapes(), c.GetLights())
 {
 }
 

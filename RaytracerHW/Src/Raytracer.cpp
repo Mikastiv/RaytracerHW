@@ -1,7 +1,10 @@
 #include "Raytracer.hpp"
 
-Raytracer::Raytracer(std::vector<std::shared_ptr<Shape>>&& shapes)
+#include <algorithm>
+
+Raytracer::Raytracer(std::vector<std::shared_ptr<Shape>>&& shapes, std::vector<std::shared_ptr<Light>>&& lights)
     : mShapes(shapes)
+    , mLights(lights)
 {
 }
 
@@ -25,6 +28,13 @@ auto Raytracer::Intersect(const Ray<float>& ray) const -> Color
 
     if (closestIntersection)
     {
+        for (const auto& l : mLights)
+        {
+            const auto lightRay = l->GenerateLightRay(closestIntersection->mLocalGeo.mPos);
+            if (std::any_of(
+                    mShapes.cbegin(), mShapes.cend(), [&lightRay](const auto& s) { return s->Intersect(lightRay); }))
+                break;
+        }
         return Color{ 1.0f, 1.0f, 0.0f };
     }
 
