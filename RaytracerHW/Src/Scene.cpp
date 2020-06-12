@@ -32,11 +32,11 @@ auto Scene::Render() -> void
 
         const uint32_t currentPixel = y * mImage.GetWidth() + x;
         const float imagePixelSize = float(mImage.GetWidth() * mImage.GetHeight());
-        const uint32_t charCount = uint32_t((currentPixel / imagePixelSize) * progressBarSize);
+        const uint32_t charCount = uint32_t((currentPixel / imagePixelSize) * (progressBarSize + 1));
 
         if (charCount > lastCharCount)
         {
-            std::cout << "\rProgress: " << std::setw(progressBarSize) << std::left << std::string(charCount + 1, '=') << '|'
+            std::cout << "\rProgress: " << std::setw(progressBarSize) << std::left << std::string(charCount, '=') << '|'
                       << std::flush;
             lastCharCount = charCount;
         }
