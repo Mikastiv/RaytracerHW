@@ -11,7 +11,7 @@ class Raytracer
 public:
     Raytracer(std::vector<std::shared_ptr<Shape>>&& shapes, std::vector<std::shared_ptr<Light>>&& lights);
 
-    auto Intersect(const Ray<float>& ray) const -> Color;
+    auto Trace(const Ray<float>& ray, const Vec3f& eyePos) const -> Color;
 
 private:
     std::vector<std::shared_ptr<Shape>> mShapes;

@@ -31,12 +31,17 @@ auto Camera::GenerateRay(std::pair<uint32_t, uint32_t> screenPixel) -> Ray<float
     return Ray<float>(mEyePos, dir);
 }
 
-auto Camera::Width() const -> uint32_t
+auto Camera::GetWidth() const -> uint32_t
 {
     return mWidth;
 }
 
-auto Camera::Height() const -> uint32_t
+auto Camera::GetHeight() const -> uint32_t
 {
     return mHeight;
+}
+
+auto Camera::GetEyePos() const -> Vec3f
+{
+    return mEyePos;
 }

@@ -10,3 +10,8 @@ auto PointLight::GenerateLightRay(const Vec3f& srcPos) const -> Ray<float>
 {
     return {mPos, Normalize(srcPos - mPos)};
 }
+
+auto PointLight::GetLightDirection(const Vec3f& srcPos) const -> Vec3f
+{
+    return Normalize(mPos - srcPos);
+}

@@ -19,7 +19,7 @@ auto Scene::Render() -> void
         const auto ray = mCamera.GenerateRay(*pixel);
         const auto [x, y] = *pixel;
 
-        Color c = mRaytracer.Intersect(ray);
+        Color c = mRaytracer.Trace(ray, mCamera.GetEyePos());
 
         mImage.PutPixel(x, y, c);
     }

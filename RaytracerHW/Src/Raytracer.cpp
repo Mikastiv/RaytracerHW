@@ -8,7 +8,7 @@ Raytracer::Raytracer(std::vector<std::shared_ptr<Shape>>&& shapes, std::vector<s
 {
 }
 
-auto Raytracer::Intersect(const Ray<float>& ray) const -> Color
+auto Raytracer::Trace(const Ray<float>& ray, const Vec3f& eyePos) const -> Color
 {
     std::optional<Intersection> closestIntersection{};
     for (const auto& s : mShapes)
@@ -36,7 +36,15 @@ auto Raytracer::Intersect(const Ray<float>& ray) const -> Color
                     mShapes.cbegin(), mShapes.cend(), [&lightRay](const auto& s) { return s->Intersect(lightRay); }))
                 break;
 
-            // shading
+            const auto lightDir = l->GetLightDirection(closestIntersection->mLocalGeo.mPos);
+            const auto eyeDir = Normalize(eyePos - closestIntersection->mLocalGeo.mPos);
+            const auto halfVec = Normalize(lightDir - eyeDir);
+            c += closestIntersection->mShape.Shade(
+                lightDir,
+                l->GetColor(),
+                closestIntersection->mLocalGeo,
+                halfVec,
+                closestIntersection->mShape.GetMaterial());
         }
         return c;
     }

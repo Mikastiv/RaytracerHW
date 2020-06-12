@@ -23,6 +23,13 @@ public:
         , mB(uint8_t(b * 255.0f))
     {
     }
+    constexpr auto operator+=(const Color& rhs) -> Color&
+    {
+        mR += rhs.mR;
+        mG += rhs.mG;
+        mB += rhs.mB;
+        return *this;
+    }
     constexpr auto GetR() const noexcept -> uint8_t
     {
         return mR;
