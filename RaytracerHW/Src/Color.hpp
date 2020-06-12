@@ -23,20 +23,23 @@ public:
     }
     constexpr Color(float r, float g, float b) noexcept
         : mR((uint8_t)std::min(
-              uint32_t(r * std::numeric_limits<uint8_t>::max()), (uint32_t)std::numeric_limits<uint8_t>::max()))
+              uint32_t(r * (float)std::numeric_limits<uint8_t>::max()), (uint32_t)std::numeric_limits<uint8_t>::max()))
         , mG((uint8_t)std::min(
-              uint32_t(g * std::numeric_limits<uint8_t>::max()), (uint32_t)std::numeric_limits<uint8_t>::max()))
+              uint32_t(g * (float)std::numeric_limits<uint8_t>::max()), (uint32_t)std::numeric_limits<uint8_t>::max()))
         , mB((uint8_t)std::min(
-              uint32_t(b * std::numeric_limits<uint8_t>::max()), (uint32_t)std::numeric_limits<uint8_t>::max()))
+              uint32_t(b * (float)std::numeric_limits<uint8_t>::max()), (uint32_t)std::numeric_limits<uint8_t>::max()))
     {
     }
     constexpr Color(Vec3f rgb) noexcept
         : mR((uint8_t)std::min(
-              uint32_t(rgb.x * std::numeric_limits<uint8_t>::max()), (uint32_t)std::numeric_limits<uint8_t>::max()))
+              uint32_t(rgb.x * (float)std::numeric_limits<uint8_t>::max()),
+              (uint32_t)std::numeric_limits<uint8_t>::max()))
         , mG((uint8_t)std::min(
-              uint32_t(rgb.y * std::numeric_limits<uint8_t>::max()), (uint32_t)std::numeric_limits<uint8_t>::max()))
+              uint32_t(rgb.y * (float)std::numeric_limits<uint8_t>::max()),
+              (uint32_t)std::numeric_limits<uint8_t>::max()))
         , mB((uint8_t)std::min(
-              uint32_t(rgb.z * std::numeric_limits<uint8_t>::max()), (uint32_t)std::numeric_limits<uint8_t>::max()))
+              uint32_t(rgb.z * (float)std::numeric_limits<uint8_t>::max()),
+              (uint32_t)std::numeric_limits<uint8_t>::max()))
     {
     }
     constexpr auto operator+=(const Color& rhs) -> Color&

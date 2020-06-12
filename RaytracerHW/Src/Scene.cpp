@@ -18,8 +18,7 @@ Scene::Scene(const SceneConfig& c)
 
 auto Scene::Render() -> void
 {
-    const uint32_t progressBarSize = 40;
-    uint32_t lastPercentage = 0;
+    uint8_t lastPercentage = 0;
 
     const float pixelPercentageDelta = 1.0f / float(mImage.GetWidth() * mImage.GetHeight());
     float percentage = pixelPercentageDelta;
@@ -33,14 +32,16 @@ auto Scene::Render() -> void
 
         mImage.PutPixel(x, y, c);
 
-        const uint32_t currentPixel = y * mImage.GetWidth() + x;
-        const uint32_t charCount = uint32_t(percentage * progressBarSize);
+        // 396 206
+        // 390 220
+
+        const uint32_t charCount = uint32_t(percentage * Config::ProgressBarSize);
         const uint32_t currentPercentage = uint32_t(percentage * 100);
 
         if (currentPercentage > lastPercentage)
         {
-            std::cout << "\rProgress: |" << std::setw(progressBarSize) << std::left << std::string(charCount, '=')
-                      << "| " << currentPercentage << '%' << std::flush;
+            std::cout << "\rProgress: |" << std::setw(Config::ProgressBarSize) << std::left
+                      << std::string(charCount, '=') << "| " << currentPercentage << '%' << std::flush;
             lastPercentage = currentPercentage;
         }
         percentage += pixelPercentageDelta;

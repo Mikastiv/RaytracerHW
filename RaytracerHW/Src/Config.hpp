@@ -43,6 +43,7 @@ public:
     static constexpr float Epsilon = 0.0001f;
     static constexpr float TMin = 0.0f;
     static constexpr float TMax = 100000.0f;
+    static constexpr uint8_t ProgressBarSize = 50;
 
     // Command Tokens
     static constexpr std::string_view SizeToken             = "size";
