@@ -9,7 +9,7 @@ int main()
 
     try
     {
-        const auto configs = Parser::ParseFile("scene2.test");
+        const auto configs = Parser::ParseFile("scene4-diffuse.test");
         const SceneConfig sceneConfig{ configs };
         scene = std::make_unique<Scene>(sceneConfig);
         scene->Render();
