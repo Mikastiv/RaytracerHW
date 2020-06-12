@@ -19,8 +19,8 @@ ambient .1 .1 .1
 directional 0 0 1 .5 .5 .5 
 point 2 0 -3 .5 .5 .5
 diffuse 1 0 0 
-specular .8 .8 .8
-shininess 100
+specular 1 1 1
+shininess 200
 
 # Now specify the geometry 
 # Again, for initial testing, maybe you want to implement a dummy 
