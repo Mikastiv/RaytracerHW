@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Vec3.hpp"
+
 #include <cstdint>
 #include <tuple>
 
@@ -23,6 +25,12 @@ public:
         , mB(uint8_t(b * 255.0f))
     {
     }
+    constexpr Color(Vec3f rgb) noexcept
+        : mR(uint8_t(rgb.x * 255.0f))
+        , mG(uint8_t(rgb.y * 255.0f))
+        , mB(uint8_t(rgb.z * 255.0f))
+    {
+    }
     constexpr auto operator+=(const Color& rhs) -> Color&
     {
         mR += rhs.mR;
@@ -34,33 +42,21 @@ public:
     {
         return mR;
     }
-    constexpr auto GetRNorm() const noexcept -> float
-    {
-        return (float)mR / 255.0f;
-    }
     constexpr auto GetG() const noexcept -> uint8_t
     {
         return mG;
-    }
-    constexpr auto GetGNorm() const noexcept -> float
-    {
-        return (float)mG / 255.0f;
     }
     constexpr auto GetB() const noexcept -> uint8_t
     {
         return mB;
     }
-    constexpr auto GetBNorm() const noexcept -> float
-    {
-        return (float)mB / 255.0f;
-    }
     constexpr auto GetRGB() const noexcept -> std::tuple<uint8_t, uint8_t, uint8_t>
     {
         return { GetR(), GetG(), GetB() };
     }
-    constexpr auto GetRGBNorm() const noexcept -> std::tuple<float, float, float>
+    constexpr auto GetVec3f() const noexcept -> Vec3f
     {
-        return { GetRNorm(), GetGNorm(), GetBNorm() };
+        return { float(mR) / 255.0f, float(mG) / 255.0f, float(mB) / 255.0f };
     }
     auto SetR(uint8_t r) noexcept -> void
     {

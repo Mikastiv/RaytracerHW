@@ -13,5 +13,5 @@ auto TriangleNormal::Shade(
     const Vec3f& lightDir, Color lightColor, const LocalGeo& localGeo, const Vec3f& halfVec,
     const Material& material) const -> Color
 {
-    return Color{};
+    return Shape::Shade(lightDir, lightColor, localGeo, halfVec, material);
 }

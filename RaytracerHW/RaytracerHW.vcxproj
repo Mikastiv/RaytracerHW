@@ -92,6 +92,7 @@
     <ClCompile Include="Src\Sampler.cpp" />
     <ClCompile Include="Src\Scene.cpp" />
     <ClCompile Include="Src\SceneConfig.cpp" />
+    <ClCompile Include="Src\Shape.cpp" />
     <ClCompile Include="Src\Sphere.cpp" />
     <ClCompile Include="Src\Triangle.cpp" />
     <ClCompile Include="Src\TriangleNormal.cpp" />

@@ -45,10 +45,3 @@ auto Triangle::Intersect(const Ray<float>& ray) const -> std::optional<Intersect
 
     return Intersection{ *this, { intersectPoint + (Config::Epsilon * normal), normal, t } };
 }
-
-auto Triangle::Shade(
-    const Vec3f& lightDir, Color lightColor, const LocalGeo& localGeo, const Vec3f& halfVec,
-    const Material& material) const -> Color
-{
-    return Color{};
-}

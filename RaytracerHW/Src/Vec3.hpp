@@ -40,6 +40,17 @@ public:
     {
         return { -x, -y, -z };
     }
+    constexpr auto operator*=(const Vec3& rhs) -> Vec3&
+    {
+        x *= rhs.x;
+        y *= rhs.y;
+        z *= rhs.z;
+        return *this;
+    }
+    constexpr auto operator*(const Vec3& rhs) const -> Vec3
+    {
+        return Vec3{ *this } *= rhs;
+    }
     constexpr auto operator*=(const T& rhs) -> Vec3&
     {
         x *= rhs;
