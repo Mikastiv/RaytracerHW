@@ -37,7 +37,7 @@ auto Raytracer::Trace(const Ray<float>& ray, const Vec3f& eyePos) const -> Color
                 break;
 
             const auto lightDir = l->GetLightDirection(closestIntersection->mLocalGeo.mPos);
-            const auto eyeDir = Normalize(eyePos - closestIntersection->mLocalGeo.mPos);
+            const auto eyeDir = Normalize(closestIntersection->mLocalGeo.mPos - eyePos);
             const auto halfVec = Normalize(lightDir - eyeDir);
             c += closestIntersection->mShape.Shade(
                 lightDir,
