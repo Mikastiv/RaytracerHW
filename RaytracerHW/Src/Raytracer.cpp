@@ -46,7 +46,7 @@ auto Raytracer::Trace(const Ray<float>& ray, const Vec3f& eyePos) const -> Color
                 halfVec,
                 closestIntersection->mShape.GetMaterial());
         }
-        return c;
+        return c + closestIntersection->mShape.GetMaterial().mKa + closestIntersection->mShape.GetMaterial().mKe;
     }
 
     return Color{};

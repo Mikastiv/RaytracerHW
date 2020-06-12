@@ -38,6 +38,10 @@ public:
         mB += rhs.mB;
         return *this;
     }
+    constexpr auto operator+(const Color& rhs) const -> Color
+    {
+        return Color{ *this } += rhs;
+    }
     constexpr auto GetR() const noexcept -> uint8_t
     {
         return mR;
