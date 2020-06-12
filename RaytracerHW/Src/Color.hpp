@@ -4,6 +4,8 @@
 
 #include <cstdint>
 #include <tuple>
+#include <limits>
+#include <algorithm>
 
 // RGB
 class Color
@@ -20,22 +22,33 @@ public:
     {
     }
     constexpr Color(float r, float g, float b) noexcept
-        : mR(uint8_t(r * 255.0f))
-        , mG(uint8_t(g * 255.0f))
-        , mB(uint8_t(b * 255.0f))
+        : mR((uint8_t)std::min(
+              uint32_t(r * std::numeric_limits<uint8_t>::max()), (uint32_t)std::numeric_limits<uint8_t>::max()))
+        , mG((uint8_t)std::min(
+              uint32_t(g * std::numeric_limits<uint8_t>::max()), (uint32_t)std::numeric_limits<uint8_t>::max()))
+        , mB((uint8_t)std::min(
+              uint32_t(b * std::numeric_limits<uint8_t>::max()), (uint32_t)std::numeric_limits<uint8_t>::max()))
     {
     }
     constexpr Color(Vec3f rgb) noexcept
-        : mR(uint8_t(rgb.x * 255.0f))
-        , mG(uint8_t(rgb.y * 255.0f))
-        , mB(uint8_t(rgb.z * 255.0f))
+        : mR((uint8_t)std::min(
+              uint32_t(rgb.x * std::numeric_limits<uint8_t>::max()), (uint32_t)std::numeric_limits<uint8_t>::max()))
+        , mG((uint8_t)std::min(
+              uint32_t(rgb.y * std::numeric_limits<uint8_t>::max()), (uint32_t)std::numeric_limits<uint8_t>::max()))
+        , mB((uint8_t)std::min(
+              uint32_t(rgb.z * std::numeric_limits<uint8_t>::max()), (uint32_t)std::numeric_limits<uint8_t>::max()))
     {
     }
     constexpr auto operator+=(const Color& rhs) -> Color&
     {
-        mR += rhs.mR;
-        mG += rhs.mG;
-        mB += rhs.mB;
+        const uint16_t r = (uint16_t)mR + rhs.mR;
+        const uint16_t g = (uint16_t)mG + rhs.mG;
+        const uint16_t b = (uint16_t)mB + rhs.mB;
+
+        mR = (uint8_t)std::min(r, (uint16_t)std::numeric_limits<uint8_t>::max());
+        mG = (uint8_t)std::min(g, (uint16_t)std::numeric_limits<uint8_t>::max());
+        mB = (uint8_t)std::min(b, (uint16_t)std::numeric_limits<uint8_t>::max());
+
         return *this;
     }
     constexpr auto operator+(const Color& rhs) const -> Color

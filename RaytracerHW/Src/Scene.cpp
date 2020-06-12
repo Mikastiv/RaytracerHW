@@ -19,7 +19,7 @@ Scene::Scene(const SceneConfig& c)
 auto Scene::Render() -> void
 {
     const uint32_t progressBarSize = 40;
-    uint32_t lastCharCount = 0;
+    uint32_t lastPercentage = 0;
 
     while (const auto pixel = mSampler.Sample())
     {
@@ -32,13 +32,15 @@ auto Scene::Render() -> void
 
         const uint32_t currentPixel = y * mImage.GetWidth() + x;
         const float imagePixelSize = float(mImage.GetWidth() * mImage.GetHeight());
-        const uint32_t charCount = uint32_t((currentPixel / imagePixelSize) * (progressBarSize + 1));
+        const float percentage = currentPixel / imagePixelSize;
+        const uint32_t charCount = uint32_t(percentage * (progressBarSize + 1));
+        const uint32_t currentPercentage = uint32_t(percentage * 101);
 
-        if (charCount > lastCharCount)
+        if (currentPercentage > lastPercentage)
         {
-            std::cout << "\rProgress: " << std::setw(progressBarSize) << std::left << std::string(charCount, '=') << '|'
-                      << std::flush;
-            lastCharCount = charCount;
+            std::cout << "\rProgress: " << std::setw(progressBarSize) << std::left << std::string(charCount, '=')
+                      << "| " << currentPercentage << '%' << std::flush;
+            lastPercentage = currentPercentage;
         }
     }
 
