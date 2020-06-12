@@ -15,5 +15,5 @@ auto DirectionalLight::GenerateLightRay(const Vec3f& srcPos) const -> Ray<float>
 
 auto DirectionalLight::GetLightDirection(const Vec3f& srcPos) const -> Vec3f
 {
-    return mDir;
+    return -mDir;
 }
