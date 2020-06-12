@@ -42,3 +42,13 @@ auto Image::Clear(Color c) -> void
         }
     }
 }
+
+auto Image::GetWidth() const -> uint32_t
+{
+    return mWidth;
+}
+
+auto Image::GetHeight() const -> uint32_t
+{
+    return mHeight;
+}

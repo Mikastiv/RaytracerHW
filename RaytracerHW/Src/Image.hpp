@@ -14,6 +14,8 @@ public:
     auto PutPixel(uint32_t x, uint32_t y, Color c) -> void;
     auto Save(std::string_view file) const -> bool;
     auto Clear(Color c) -> void;
+    auto GetWidth() const -> uint32_t;
+    auto GetHeight() const -> uint32_t;
 
 private:
     uint32_t mWidth;
