@@ -1,6 +1,6 @@
 #include "Light.hpp"
 
-Light::Light(Color color)
+Light::Light(Vec3f color)
     : mColor(std::move(color))
 {
 }

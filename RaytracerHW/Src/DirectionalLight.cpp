@@ -2,7 +2,7 @@
 
 #include <limits>
 
-DirectionalLight::DirectionalLight(Color color, Vec3f dir)
+DirectionalLight::DirectionalLight(Vec3f color, Vec3f dir)
     : Light(std::move(color))
     , mDir(Normalize(dir))
 {

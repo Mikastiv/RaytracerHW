@@ -3,7 +3,7 @@
 #include "Config.hpp"
 #include "Vec3.hpp"
 #include "Shape.hpp"
-#include "Light.hpp"
+#include "PointLight.hpp"
 
 #include <memory>
 
@@ -43,4 +43,7 @@ private:
     std::vector<std::pair<Vec3f, Vec3f>> mVerticesNormals{};
     std::vector<std::shared_ptr<Shape>> mShapes{};
     std::vector<std::shared_ptr<Light>> mLights{};
+    PointLight::Attenuation mAttenuation{ Config::DefaultAttenuation.x,
+                                          Config::DefaultAttenuation.y,
+                                          Config::DefaultAttenuation.z };
 };

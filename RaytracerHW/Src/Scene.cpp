@@ -32,9 +32,6 @@ auto Scene::Render() -> void
 
         mImage.PutPixel(x, y, c);
 
-        // 396 206
-        // 390 220
-
         const uint32_t charCount = uint32_t(percentage * Config::ProgressBarSize);
         const uint32_t currentPercentage = uint32_t(percentage * 100);
 

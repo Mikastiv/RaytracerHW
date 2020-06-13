@@ -3,7 +3,7 @@
 #include "Sphere.hpp"
 #include "TriangleNormal.hpp"
 #include "DirectionalLight.hpp"
-#include "PointLight.hpp"
+#include "Color.hpp"
 
 #include <stdexcept>
 #include <sstream>
@@ -136,8 +136,8 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
             if (params.size() != Config::LightParamCount)
                 ThrowParamCountException(Config::DirectionalLightToken, c.GetLineNumber());
 
-            mLights.push_back(std::make_unique<DirectionalLight>(
-                Color{ std::get<float>(params[3]), std::get<float>(params[4]), std::get<float>(params[5]) },
+            mLights.push_back(std::make_shared<DirectionalLight>(
+                Vec3f{ std::get<float>(params[3]), std::get<float>(params[4]), std::get<float>(params[5]) },
                 Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) }));
             break;
         }
@@ -146,9 +146,10 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
             if (params.size() != Config::LightParamCount)
                 ThrowParamCountException(Config::PointLightToken, c.GetLineNumber());
 
-            mLights.push_back(std::make_unique<PointLight>(
-                Color{ std::get<float>(params[3]), std::get<float>(params[4]), std::get<float>(params[5]) },
-                Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) }));
+            mLights.push_back(std::make_shared<PointLight>(
+                Vec3f{ std::get<float>(params[3]), std::get<float>(params[4]), std::get<float>(params[5]) },
+                Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) },
+                mAttenuation));
             break;
         }
         case Type::Ambient:
@@ -156,7 +157,7 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
             if (params.size() != Config::AmbientParamCount)
                 ThrowParamCountException(Config::AmbientToken, c.GetLineNumber());
 
-            mMaterial.mKa = Color{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
+            mMaterial.mKa = Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
             break;
         }
         case Type::Diffuse:
@@ -164,7 +165,7 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
             if (params.size() != Config::DiffuseParamCount)
                 ThrowParamCountException(Config::DiffuseToken, c.GetLineNumber());
 
-            mMaterial.mKd = Color{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
+            mMaterial.mKd = Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
             break;
         }
         case Type::Specular:
@@ -172,7 +173,7 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
             if (params.size() != Config::SpecularParamCount)
                 ThrowParamCountException(Config::SpecularToken, c.GetLineNumber());
 
-            mMaterial.mKs = Color{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
+            mMaterial.mKs = Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
             break;
         }
         case Type::Emission:
@@ -180,7 +181,7 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
             if (params.size() != Config::EmissionParamCount)
                 ThrowParamCountException(Config::EmissionToken, c.GetLineNumber());
 
-            mMaterial.mKe = Color{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
+            mMaterial.mKe = Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
             break;
         }
         case Type::Shininess:
@@ -189,6 +190,14 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
                 ThrowParamCountException(Config::ShininessToken, c.GetLineNumber());
 
             mMaterial.mShininess = std::get<float>(params[0]);
+            break;
+        }
+        case Type::Attenuation:
+        {
+            if (params.size() != Config::AttenuationParamCount)
+                ThrowParamCountException(Config::AttenuationToken, c.GetLineNumber());
+
+            mAttenuation = { std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
             break;
         }
         default:

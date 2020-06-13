@@ -1,5 +1,8 @@
 #include "Raytracer.hpp"
 
+#include "PointLight.hpp"
+#include "Color.hpp"
+
 #include <algorithm>
 
 Raytracer::Raytracer(std::vector<std::shared_ptr<Shape>>&& shapes, std::vector<std::shared_ptr<Light>>&& lights)
@@ -28,7 +31,7 @@ auto Raytracer::Trace(const Ray<float>& ray, const Vec3f& eyePos) const -> Color
 
     if (closestIntersection)
     {
-        Color c{};
+        Vec3f c{};
         for (const auto& l : mLights)
         {
             const auto lightRay = l->GenerateLightRay(closestIntersection->mLocalGeo.mPos);
@@ -39,14 +42,20 @@ auto Raytracer::Trace(const Ray<float>& ray, const Vec3f& eyePos) const -> Color
             const auto lightDir = l->GetLightDirection(closestIntersection->mLocalGeo.mPos);
             const auto eyeDir = Normalize(eyePos - closestIntersection->mLocalGeo.mPos);
             const auto halfVec = Normalize(lightDir + eyeDir);
-            c += closestIntersection->mShape.Shade(
-                lightDir,
-                l->GetColor(),
-                closestIntersection->mLocalGeo,
-                halfVec,
-                closestIntersection->mShape.GetMaterial());
+
+            float attenuation = 1.0f;
+            if (const auto pLight = dynamic_cast<PointLight*>(l.get()))
+            {
+                const auto att = pLight->GetAttenuation();
+                const auto d = (pLight->GetPos() - closestIntersection->mLocalGeo.mPos).Length();
+                attenuation = 1.0f / att.mKc + att.mKl * d + att.mKq * d * d;
+            }
+
+            c += attenuation *
+                 closestIntersection->mShape.Shade(lightDir, l->GetColor(), closestIntersection->mLocalGeo, halfVec);
         }
-        return c + closestIntersection->mShape.GetMaterial().mKa + closestIntersection->mShape.GetMaterial().mKe;
+        return Color{ c + closestIntersection->mShape.GetMaterial().mKa +
+                      closestIntersection->mShape.GetMaterial().mKe };
     }
 
     return Color{};

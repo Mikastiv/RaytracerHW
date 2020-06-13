@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Vec3.hpp"
 #include "Material.hpp"
 
 #include <vector>
@@ -41,7 +40,7 @@ public:
 public:
     // clang-format off
     static constexpr float Epsilon = 0.0001f;
-    static constexpr float TMin = 0.0f;
+    static constexpr float TMin = 0.00001f;
     static constexpr float TMax = 100000.0f;
     static constexpr uint8_t ProgressBarSize = 50;
 
@@ -89,6 +88,7 @@ public:
     static constexpr uint8_t SpecularParamCount = 3;
     static constexpr uint8_t EmissionParamCount = 3;
     static constexpr uint8_t ShininessParamCount = 1;
+    static constexpr uint8_t AttenuationParamCount = 3;
 
     // Default Values
     static constexpr std::string_view DefaultOutputFile = "output.png";
@@ -101,9 +101,12 @@ public:
     static constexpr Vec3f DefaultLookAt = { 0.0f, 0.0f, 1.0f };
     static constexpr Vec3f DefaultUp = { 0.0f, 1.0f, 0.0f };
     static constexpr float DefaultFovy = 90.0f;
-    static constexpr Material DefaultMaterial = {
-        Color{ 0.4f, 0.4f, 0.4f }, Color{ 0.4f, 0.4f, 0.4f }, Color{ 0.1f, 0.1f, 0.1f }, Color{ 0.0f, 0.0f, 0.0f }, 50u
-    };
+    static constexpr Material DefaultMaterial = { Vec3f{ 0.4f, 0.4f, 0.4f },
+                                                  Vec3f{ 0.4f, 0.4f, 0.4f },
+                                                  Vec3f{ 0.1f, 0.1f, 0.1f },
+                                                  Vec3f{ 0.0f, 0.0f, 0.0f },
+                                                  50.0f };
+    static constexpr Vec3f DefaultAttenuation = { 1.0f, 0.14f, 0.07f };
 
 public:
     Config(Type type, std::vector<std::variant<float, std::string>> params, uint32_t line);

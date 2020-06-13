@@ -42,22 +42,6 @@ public:
               (uint32_t)std::numeric_limits<uint8_t>::max()))
     {
     }
-    constexpr auto operator+=(const Color& rhs) -> Color&
-    {
-        const uint16_t r = (uint16_t)mR + rhs.mR;
-        const uint16_t g = (uint16_t)mG + rhs.mG;
-        const uint16_t b = (uint16_t)mB + rhs.mB;
-
-        mR = (uint8_t)std::min(r, (uint16_t)std::numeric_limits<uint8_t>::max());
-        mG = (uint8_t)std::min(g, (uint16_t)std::numeric_limits<uint8_t>::max());
-        mB = (uint8_t)std::min(b, (uint16_t)std::numeric_limits<uint8_t>::max());
-
-        return *this;
-    }
-    constexpr auto operator+(const Color& rhs) const -> Color
-    {
-        return Color{ *this } += rhs;
-    }
     constexpr auto GetR() const noexcept -> uint8_t
     {
         return mR;
@@ -73,10 +57,6 @@ public:
     constexpr auto GetRGB() const noexcept -> std::tuple<uint8_t, uint8_t, uint8_t>
     {
         return { GetR(), GetG(), GetB() };
-    }
-    constexpr auto GetVec3f() const noexcept -> Vec3f
-    {
-        return { float(mR) / 255.0f, float(mG) / 255.0f, float(mB) / 255.0f };
     }
     auto SetR(uint8_t r) noexcept -> void
     {

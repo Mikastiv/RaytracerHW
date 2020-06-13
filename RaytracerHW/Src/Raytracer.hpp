@@ -2,6 +2,7 @@
 
 #include "Shape.hpp"
 #include "Light.hpp"
+#include "Color.hpp"
 
 #include <vector>
 #include <memory>

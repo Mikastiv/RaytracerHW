@@ -10,8 +10,7 @@ TriangleNormal::TriangleNormal(
 }
 
 auto TriangleNormal::Shade(
-    const Vec3f& lightDir, Color lightColor, const LocalGeo& localGeo, const Vec3f& halfVec,
-    const Material& material) const -> Color
+    const Vec3f& lightDir, Vec3f lightColor, const LocalGeo& localGeo, const Vec3f& halfVec) const -> Vec3f
 {
-    return Shape::Shade(lightDir, lightColor, localGeo, halfVec, material);
+    return Shape::Shade(lightDir, lightColor, localGeo, halfVec);
 }
