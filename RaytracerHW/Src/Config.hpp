@@ -106,7 +106,7 @@ public:
                                                   Vec3f{ 0.1f, 0.1f, 0.1f },
                                                   Vec3f{ 0.0f, 0.0f, 0.0f },
                                                   50.0f };
-    static constexpr Vec3f DefaultAttenuation = { 1.0f, 0.14f, 0.07f };
+    static constexpr Vec3f DefaultAttenuation = { 1.0f, 0.0f, 0.0f };
 
 public:
     Config(Type type, std::vector<std::variant<float, std::string>> params, uint32_t line);

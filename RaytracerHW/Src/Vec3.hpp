@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <cassert>
+#include <algorithm>
 
 template <typename T>
 struct Vec3
@@ -92,6 +93,13 @@ public:
     constexpr auto Dot(const Vec3& other) const -> T
     {
         return static_cast<T>(x * other.x + y * other.y + z * other.z);
+    }
+    constexpr auto Saturate() -> Vec3&
+    {
+        x = std::min(std::max(static_cast<T>(0), x), static_cast<T>(1));
+        y = std::min(std::max(static_cast<T>(0), y), static_cast<T>(1));
+        z = std::min(std::max(static_cast<T>(0), z), static_cast<T>(1));
+        return *this;
     }
 
 public:

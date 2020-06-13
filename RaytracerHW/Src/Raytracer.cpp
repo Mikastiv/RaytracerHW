@@ -54,8 +54,9 @@ auto Raytracer::Trace(const Ray<float>& ray, const Vec3f& eyePos) const -> Color
             c += attenuation *
                  closestIntersection->mShape.Shade(lightDir, l->GetColor(), closestIntersection->mLocalGeo, halfVec);
         }
-        return Color{ c + closestIntersection->mShape.GetMaterial().mKa +
-                      closestIntersection->mShape.GetMaterial().mKe };
+
+        return Color{ (c + closestIntersection->mShape.GetMaterial().mKa +
+                      closestIntersection->mShape.GetMaterial().mKe).Saturate() };
     }
 
     return Color{};
