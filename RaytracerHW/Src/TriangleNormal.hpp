@@ -6,13 +6,15 @@ class TriangleNormal : public Triangle
 {
 public:
     TriangleNormal(
-        Material material, std::pair<Vec3f, Vec3f> v0, std::pair<Vec3f, Vec3f> v1, std::pair<Vec3f, Vec3f> v2);
+        Material material, std::pair<glm::vec3, glm::vec3> v0, std::pair<glm::vec3, glm::vec3> v1,
+        std::pair<glm::vec3, glm::vec3> v2);
 
-    auto Shade(const Vec3f& lightDir, Vec3f lightColor, const LocalGeo& localGeo, const Vec3f& halfVec) const
-        -> Vec3f override;
+    auto
+    Shade(const glm::vec3& lightDir, glm::vec3 lightColor, const LocalGeo& localGeo, const glm::vec3& halfVec) const
+        -> glm::vec3 override;
 
 private:
-    Vec3f mV0n;
-    Vec3f mV1n;
-    Vec3f mV2n;
+    glm::vec3 mV0n;
+    glm::vec3 mV1n;
+    glm::vec3 mV2n;
 };

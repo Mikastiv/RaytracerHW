@@ -5,11 +5,11 @@
 class DirectionalLight : public Light
 {
 public:
-    DirectionalLight(Vec3f color, Vec3f dir);
+    DirectionalLight(glm::vec3 color, glm::vec3 dir);
 
-    auto GenerateLightRay(const Vec3f& srcPos) const -> Ray<float> override;
-    auto GetLightDirection(const Vec3f& srcPos) const -> Vec3f override;
+    auto GenerateLightRay(const glm::vec3& srcPos) const -> Ray override;
+    auto GetLightDirection(const glm::vec3& srcPos) const -> glm::vec3 override;
 
 private:
-    Vec3f mDir;
+    glm::vec3 mDir;
 };

@@ -5,12 +5,12 @@
 class Triangle : public Shape
 {
 public:
-    Triangle(Material material, Vec3f v0, Vec3f v1, Vec3f v2);
+    Triangle(Material material, glm::vec3 v0, glm::vec3 v1, glm::vec3 v2);
 
-    auto Intersect(const Ray<float>& ray) const -> std::optional<Intersection> override;
+    auto Intersect(const Ray& ray) const -> std::optional<Intersection> override;
 
 protected:
-    Vec3f mV0;
-    Vec3f mV1;
-    Vec3f mV2;
+    glm::vec3 mV0;
+    glm::vec3 mV1;
+    glm::vec3 mV2;
 };

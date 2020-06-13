@@ -1,21 +1,21 @@
 #pragma once
 
-#include "Vec3.hpp"
+#include <glm\glm.hpp>
 
 #include <utility>
 
 struct LocalGeo
 {
 public:
-    constexpr LocalGeo(Vec3f pos, Vec3f normal, float hitDistance)
-        : mPos(std::move(pos))
-        , mNormal(std::move(normal.Normalize()))
+    LocalGeo(glm::vec3 pos, glm::vec3 normal, float hitDistance)
+        : mPos(pos)
+        , mNormal(glm::normalize(normal))
         , mHitDistance(hitDistance)
     {
     }
 
 public:
-    Vec3f mPos;
-    Vec3f mNormal;
+    glm::vec3 mPos;
+    glm::vec3 mNormal;
     float mHitDistance;
 };

@@ -1,9 +1,10 @@
 #pragma once
 
 #include "Config.hpp"
-#include "Vec3.hpp"
 #include "Shape.hpp"
 #include "PointLight.hpp"
+
+#include <glm\vec3.hpp>
 
 #include <memory>
 
@@ -17,9 +18,9 @@ public:
     auto GetHeight() const noexcept -> uint32_t;
     auto GetMaxRayDepth() const noexcept -> uint32_t;
     auto GetFilename() const noexcept -> std::string;
-    auto GetEyePos() const noexcept -> Vec3f;
-    auto GetLookAt() const noexcept -> Vec3f;
-    auto GetUp() const noexcept -> Vec3f;
+    auto GetEyePos() const noexcept -> glm::vec3;
+    auto GetLookAt() const noexcept -> glm::vec3;
+    auto GetUp() const noexcept -> glm::vec3;
     auto GetFovy() const noexcept -> float;
     auto GetShapes() const -> std::vector<std::shared_ptr<Shape>>;
     auto GetLights() const -> std::vector<std::shared_ptr<Light>>;
@@ -34,13 +35,13 @@ private:
     uint32_t mMaxVertex{ Config::DefaultMaxVertex };
     uint32_t mMaxVertexNormal{ Config::DefaultMaxVertexNorms };
     std::string mFilename{ Config::DefaultOutputFile };
-    Vec3f mEyePos{ Config::DefaultEyePos };
-    Vec3f mLookAt{ Config::DefaultLookAt };
-    Vec3f mUp{ Config::DefaultUp };
+    glm::vec3 mEyePos{ Config::DefaultEyePos };
+    glm::vec3 mLookAt{ Config::DefaultLookAt };
+    glm::vec3 mUp{ Config::DefaultUp };
     float mFovy{ Config::DefaultFovy };
     Material mMaterial{ Config::DefaultMaterial };
-    std::vector<Vec3f> mVertices{};
-    std::vector<std::pair<Vec3f, Vec3f>> mVerticesNormals{};
+    std::vector<glm::vec3> mVertices{};
+    std::vector<std::pair<glm::vec3, glm::vec3>> mVerticesNormals{};
     std::vector<std::shared_ptr<Shape>> mShapes{};
     std::vector<std::shared_ptr<Light>> mLights{};
     PointLight::Attenuation mAttenuation{ Config::DefaultAttenuation.x,

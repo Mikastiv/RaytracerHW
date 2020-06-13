@@ -64,10 +64,10 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
             if (params.size() != Config::CameraParamCount)
                 ThrowParamCountException(Config::CameraToken, c.GetLineNumber());
 
-            mEyePos = Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
-            mLookAt = Vec3f{ std::get<float>(params[3]), std::get<float>(params[4]), std::get<float>(params[5]) };
-            mUp = Vec3f{ std::get<float>(params[6]), std::get<float>(params[7]), std::get<float>(params[8]) };
-            mUp.Normalize();
+            mEyePos = glm::vec3{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
+            mLookAt = glm::vec3{ std::get<float>(params[3]), std::get<float>(params[4]), std::get<float>(params[5]) };
+            mUp = glm::vec3{ std::get<float>(params[6]), std::get<float>(params[7]), std::get<float>(params[8]) };
+            mUp = glm::normalize(mUp);
             mFovy = std::get<float>(params[9]);
             break;
         }
@@ -78,7 +78,7 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
 
             mShapes.push_back(std::make_unique<Sphere>(
                 mMaterial,
-                Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) },
+                glm::vec3{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) },
                 std::get<float>(params[3])));
             break;
         }
@@ -102,9 +102,9 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
                 throw std::runtime_error("Too many vertices with normals (max vertex normal param exceeded)");
 
             mVerticesNormals.push_back(std::make_pair(
-                Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) },
-                Normalize(
-                    Vec3f{ std::get<float>(params[3]), std::get<float>(params[4]), std::get<float>(params[5]) })));
+                glm::vec3{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) },
+                glm::normalize(
+                    glm::vec3{ std::get<float>(params[3]), std::get<float>(params[4]), std::get<float>(params[5]) })));
             break;
         }
         case Type::Triangle:
@@ -137,8 +137,8 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
                 ThrowParamCountException(Config::DirectionalLightToken, c.GetLineNumber());
 
             mLights.push_back(std::make_shared<DirectionalLight>(
-                Vec3f{ std::get<float>(params[3]), std::get<float>(params[4]), std::get<float>(params[5]) },
-                Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) }));
+                glm::vec3{ std::get<float>(params[3]), std::get<float>(params[4]), std::get<float>(params[5]) },
+                glm::vec3{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) }));
             break;
         }
         case Type::PointLight:
@@ -147,8 +147,8 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
                 ThrowParamCountException(Config::PointLightToken, c.GetLineNumber());
 
             mLights.push_back(std::make_shared<PointLight>(
-                Vec3f{ std::get<float>(params[3]), std::get<float>(params[4]), std::get<float>(params[5]) },
-                Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) },
+                glm::vec3{ std::get<float>(params[3]), std::get<float>(params[4]), std::get<float>(params[5]) },
+                glm::vec3{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) },
                 mAttenuation));
             break;
         }
@@ -157,7 +157,8 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
             if (params.size() != Config::AmbientParamCount)
                 ThrowParamCountException(Config::AmbientToken, c.GetLineNumber());
 
-            mMaterial.mKa = Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
+            mMaterial.mKa =
+                glm::vec3{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
             break;
         }
         case Type::Diffuse:
@@ -165,7 +166,8 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
             if (params.size() != Config::DiffuseParamCount)
                 ThrowParamCountException(Config::DiffuseToken, c.GetLineNumber());
 
-            mMaterial.mKd = Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
+            mMaterial.mKd =
+                glm::vec3{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
             break;
         }
         case Type::Specular:
@@ -173,7 +175,8 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
             if (params.size() != Config::SpecularParamCount)
                 ThrowParamCountException(Config::SpecularToken, c.GetLineNumber());
 
-            mMaterial.mKs = Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
+            mMaterial.mKs =
+                glm::vec3{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
             break;
         }
         case Type::Emission:
@@ -181,7 +184,8 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
             if (params.size() != Config::EmissionParamCount)
                 ThrowParamCountException(Config::EmissionToken, c.GetLineNumber());
 
-            mMaterial.mKe = Vec3f{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
+            mMaterial.mKe =
+                glm::vec3{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
             break;
         }
         case Type::Shininess:
@@ -226,17 +230,17 @@ auto SceneConfig::GetFilename() const noexcept -> std::string
     return mFilename;
 }
 
-auto SceneConfig::GetEyePos() const noexcept -> Vec3f
+auto SceneConfig::GetEyePos() const noexcept -> glm::vec3
 {
     return mEyePos;
 }
 
-auto SceneConfig::GetLookAt() const noexcept -> Vec3f
+auto SceneConfig::GetLookAt() const noexcept -> glm::vec3
 {
     return mLookAt;
 }
 
-auto SceneConfig::GetUp() const noexcept -> Vec3f
+auto SceneConfig::GetUp() const noexcept -> glm::vec3
 {
     return mUp;
 }

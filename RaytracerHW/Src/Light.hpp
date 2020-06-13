@@ -5,16 +5,16 @@
 class Light
 {
 public:
-    Light(Vec3f color);
+    Light(glm::vec3 color);
 
-    virtual auto GenerateLightRay(const Vec3f& srcPos) const -> Ray<float> = 0;
-    virtual auto GetLightDirection(const Vec3f& srcPos) const -> Vec3f = 0;
+    virtual auto GenerateLightRay(const glm::vec3& srcPos) const -> Ray = 0;
+    virtual auto GetLightDirection(const glm::vec3& srcPos) const -> glm::vec3 = 0;
 
-    auto GetColor() const -> Vec3f
+    auto GetColor() const -> glm::vec3
     {
         return mColor;
     }
 
 private:
-    Vec3f mColor;
+    glm::vec3 mColor;
 };

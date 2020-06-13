@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vec3.hpp"
+#include <glm\vec3.hpp>
 
 #include <cstdint>
 #include <tuple>
@@ -22,25 +22,22 @@ public:
     {
     }
     constexpr Color(float r, float g, float b) noexcept
-        : mR((uint8_t)std::min(
-              uint32_t(r * (float)std::numeric_limits<uint8_t>::max()), (uint32_t)std::numeric_limits<uint8_t>::max()))
-        , mG((uint8_t)std::min(
-              uint32_t(g * (float)std::numeric_limits<uint8_t>::max()), (uint32_t)std::numeric_limits<uint8_t>::max()))
-        , mB((uint8_t)std::min(
-              uint32_t(b * (float)std::numeric_limits<uint8_t>::max()), (uint32_t)std::numeric_limits<uint8_t>::max()))
+        : mR((uint8_t)(r * (float)std::numeric_limits<uint8_t>::max()))
+        , mG((uint8_t)(g * (float)std::numeric_limits<uint8_t>::max()))
+        , mB((uint8_t)(b * (float)std::numeric_limits<uint8_t>::max()))
     {
+        assert(r <= (float)std::numeric_limits<uint8_t>::max());
+        assert(g <= (float)std::numeric_limits<uint8_t>::max());
+        assert(b <= (float)std::numeric_limits<uint8_t>::max());
     }
-    constexpr Color(Vec3f rgb) noexcept
-        : mR((uint8_t)std::min(
-              uint32_t(rgb.x * (float)std::numeric_limits<uint8_t>::max()),
-              (uint32_t)std::numeric_limits<uint8_t>::max()))
-        , mG((uint8_t)std::min(
-              uint32_t(rgb.y * (float)std::numeric_limits<uint8_t>::max()),
-              (uint32_t)std::numeric_limits<uint8_t>::max()))
-        , mB((uint8_t)std::min(
-              uint32_t(rgb.z * (float)std::numeric_limits<uint8_t>::max()),
-              (uint32_t)std::numeric_limits<uint8_t>::max()))
+    constexpr Color(glm::vec3 rgb) noexcept
+        : mR((uint8_t)(rgb.x * (float)std::numeric_limits<uint8_t>::max()))
+        , mG((uint8_t)(rgb.y * (float)std::numeric_limits<uint8_t>::max()))
+        , mB((uint8_t)(rgb.z * (float)std::numeric_limits<uint8_t>::max()))
     {
+        assert(rgb.x <= (float)std::numeric_limits<uint8_t>::max());
+        assert(rgb.y <= (float)std::numeric_limits<uint8_t>::max());
+        assert(rgb.z <= (float)std::numeric_limits<uint8_t>::max());
     }
     constexpr auto GetR() const noexcept -> uint8_t
     {

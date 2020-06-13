@@ -4,14 +4,14 @@
 #include <cmath>
 #include <tuple>
 
-Sphere::Sphere(Material material, Vec3f center, float radius)
+Sphere::Sphere(Material material, glm::vec3 center, float radius)
     : Shape(material)
     , mCenter(std::move(center))
     , mRadius(radius)
 {
 }
 
-auto Sphere::Intersect(const Ray<float>& ray) const -> std::optional<Intersection>
+auto Sphere::Intersect(const Ray& ray) const -> std::optional<Intersection>
 {
     const auto [a, b, c, disc] = GetABCDiscriminant(ray);
 
@@ -44,12 +44,12 @@ auto Sphere::Intersect(const Ray<float>& ray) const -> std::optional<Intersectio
     return Intersection{ *this, { intersectPoint + (Config::Epsilon * normal), normal, t } };
 }
 
-auto Sphere::GetABCDiscriminant(const Ray<float>& ray) const -> std::tuple<float, float, float, float>
+auto Sphere::GetABCDiscriminant(const Ray& ray) const -> std::tuple<float, float, float, float>
 {
     const auto oc = ray.mOrigin - mCenter;
-    const float a = Dot(ray.mDir, ray.mDir);
-    const float b = 2.0f * Dot(ray.mDir, oc);
-    const float c = Dot(oc, oc) - (mRadius * mRadius);
+    const float a = glm::dot(ray.mDir, ray.mDir);
+    const float b = 2.0f * glm::dot(ray.mDir, oc);
+    const float c = glm::dot(oc, oc) - (mRadius * mRadius);
 
     const float discriminant = (b * b) - (4 * a * c);
 

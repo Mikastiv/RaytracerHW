@@ -11,7 +11,7 @@ Raytracer::Raytracer(std::vector<std::shared_ptr<Shape>>&& shapes, std::vector<s
 {
 }
 
-auto Raytracer::Trace(const Ray<float>& ray, const Vec3f& eyePos) const -> Color
+auto Raytracer::Trace(const Ray& ray, const glm::vec3& eyePos) const -> Color
 {
     std::optional<Intersection> closestIntersection{};
     for (const auto& s : mShapes)
@@ -31,7 +31,7 @@ auto Raytracer::Trace(const Ray<float>& ray, const Vec3f& eyePos) const -> Color
 
     if (closestIntersection)
     {
-        Vec3f c{};
+        glm::vec3 c{};
         for (const auto& l : mLights)
         {
             const auto lightRay = l->GenerateLightRay(closestIntersection->mLocalGeo.mPos);
@@ -40,14 +40,14 @@ auto Raytracer::Trace(const Ray<float>& ray, const Vec3f& eyePos) const -> Color
                 break;
 
             const auto lightDir = l->GetLightDirection(closestIntersection->mLocalGeo.mPos);
-            const auto eyeDir = Normalize(eyePos - closestIntersection->mLocalGeo.mPos);
-            const auto halfVec = Normalize(lightDir + eyeDir);
+            const auto eyeDir = glm::normalize(eyePos - closestIntersection->mLocalGeo.mPos);
+            const auto halfVec = glm::normalize(lightDir + eyeDir);
 
             float attenuation = 1.0f;
             if (const auto pLight = dynamic_cast<PointLight*>(l.get()))
             {
                 const auto att = pLight->GetAttenuation();
-                const auto d = (pLight->GetPos() - closestIntersection->mLocalGeo.mPos).Length();
+                const auto d = glm::length(pLight->GetPos() - closestIntersection->mLocalGeo.mPos);
                 attenuation = 1.0f / att.mKc + att.mKl * d + att.mKq * d * d;
             }
 
@@ -55,8 +55,14 @@ auto Raytracer::Trace(const Ray<float>& ray, const Vec3f& eyePos) const -> Color
                  closestIntersection->mShape.Shade(lightDir, l->GetColor(), closestIntersection->mLocalGeo, halfVec);
         }
 
-        return Color{ (c + closestIntersection->mShape.GetMaterial().mKa +
-                      closestIntersection->mShape.GetMaterial().mKe).Saturate() };
+        glm::vec3 retVal =
+            c + closestIntersection->mShape.GetMaterial().mKa + closestIntersection->mShape.GetMaterial().mKe;
+
+        retVal.x = glm::clamp(retVal.x, 0.0f, 1.0f);
+        retVal.y = glm::clamp(retVal.y, 0.0f, 1.0f);
+        retVal.z = glm::clamp(retVal.z, 0.0f, 1.0f);
+
+        return Color{ retVal };
     }
 
     return Color{};

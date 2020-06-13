@@ -1,19 +1,20 @@
 #include "DirectionalLight.hpp"
 
+#include <glm/glm.hpp>
 #include <limits>
 
-DirectionalLight::DirectionalLight(Vec3f color, Vec3f dir)
+DirectionalLight::DirectionalLight(glm::vec3 color, glm::vec3 dir)
     : Light(std::move(color))
-    , mDir(Normalize(dir))
+    , mDir(glm::normalize(dir))
 {
 }
 
-auto DirectionalLight::GenerateLightRay(const Vec3f& srcPos) const -> Ray<float>
+auto DirectionalLight::GenerateLightRay(const glm::vec3& srcPos) const -> Ray
 {
     return { srcPos, -mDir, std::numeric_limits<float>::max() };
 }
 
-auto DirectionalLight::GetLightDirection(const Vec3f& srcPos) const -> Vec3f
+auto DirectionalLight::GetLightDirection(const glm::vec3& srcPos) const -> glm::vec3
 {
     return -mDir;
 }

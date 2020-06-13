@@ -80,9 +80,6 @@
     <ClInclude Include="Src\Color.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Vec3.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Ray.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

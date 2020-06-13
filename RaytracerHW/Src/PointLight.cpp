@@ -1,20 +1,22 @@
 #include "PointLight.hpp"
 
-PointLight::PointLight(Vec3f color, Vec3f pos, Attenuation attenuation)
+#include <glm/glm.hpp>
+
+PointLight::PointLight(glm::vec3 color, glm::vec3 pos, Attenuation attenuation)
     : Light(std::move(color))
     , mPos(std::move(pos))
     , mAttenuation(std::move(attenuation))
 {
 }
 
-auto PointLight::GenerateLightRay(const Vec3f& srcPos) const -> Ray<float>
+auto PointLight::GenerateLightRay(const glm::vec3& srcPos) const -> Ray
 {
-    return {srcPos, Normalize(mPos - srcPos)};
+    return { srcPos, glm::normalize(mPos - srcPos) };
 }
 
-auto PointLight::GetLightDirection(const Vec3f& srcPos) const -> Vec3f
+auto PointLight::GetLightDirection(const glm::vec3& srcPos) const -> glm::vec3
 {
-    return Normalize(mPos - srcPos);
+    return glm::normalize(mPos - srcPos);
 }
 
 auto PointLight::GetAttenuation() const -> Attenuation
@@ -22,7 +24,7 @@ auto PointLight::GetAttenuation() const -> Attenuation
     return mAttenuation;
 }
 
-auto PointLight::GetPos() const -> Vec3f
+auto PointLight::GetPos() const -> glm::vec3
 {
     return mPos;
 }

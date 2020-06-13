@@ -97,16 +97,16 @@ public:
     static constexpr uint32_t DefaultMaxRayDepth = 5;
     static constexpr uint32_t DefaultMaxVertex = 256;
     static constexpr uint32_t DefaultMaxVertexNorms = 256;
-    static constexpr Vec3f DefaultEyePos = { 0.0f, 0.0f, 0.0f };
-    static constexpr Vec3f DefaultLookAt = { 0.0f, 0.0f, 1.0f };
-    static constexpr Vec3f DefaultUp = { 0.0f, 1.0f, 0.0f };
+    static constexpr glm::vec3 DefaultEyePos = { 0.0f, 0.0f, 0.0f };
+    static constexpr glm::vec3 DefaultLookAt = { 0.0f, 0.0f, 1.0f };
+    static constexpr glm::vec3 DefaultUp = { 0.0f, 1.0f, 0.0f };
     static constexpr float DefaultFovy = 90.0f;
-    static constexpr Material DefaultMaterial = { Vec3f{ 0.4f, 0.4f, 0.4f },
-                                                  Vec3f{ 0.4f, 0.4f, 0.4f },
-                                                  Vec3f{ 0.1f, 0.1f, 0.1f },
-                                                  Vec3f{ 0.0f, 0.0f, 0.0f },
+    static constexpr Material DefaultMaterial = { glm::vec3{ 0.4f, 0.4f, 0.4f },
+                                                  glm::vec3{ 0.4f, 0.4f, 0.4f },
+                                                  glm::vec3{ 0.1f, 0.1f, 0.1f },
+                                                  glm::vec3{ 0.0f, 0.0f, 0.0f },
                                                   50.0f };
-    static constexpr Vec3f DefaultAttenuation = { 1.0f, 0.0f, 0.0f };
+    static constexpr glm::vec3 DefaultAttenuation = { 1.0f, 0.0f, 0.0f };
 
 public:
     Config(Type type, std::vector<std::variant<float, std::string>> params, uint32_t line);

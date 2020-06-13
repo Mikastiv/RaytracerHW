@@ -2,7 +2,9 @@
 
 #include "Utils.hpp"
 
-Camera::Camera(uint32_t width, uint32_t height, float fovy, Vec3f eye, Vec3f lookAt, Vec3f up)
+#include <glm\glm.hpp>
+
+Camera::Camera(uint32_t width, uint32_t height, float fovy, glm::vec3 eye, glm::vec3 lookAt, glm::vec3 up)
     : mWidth(width)
     , mHeight(height)
     , mFovy(fovy)
@@ -10,13 +12,13 @@ Camera::Camera(uint32_t width, uint32_t height, float fovy, Vec3f eye, Vec3f loo
     , mEyePos(std::move(eye))
     , mLookAt(std::move(lookAt))
     , mUp(std::move(up))
-    , mW((mEyePos - mLookAt).Normalize())
-    , mU(mUp.Cross(mW).Normalize())
-    , mV(mW.Cross(mU))
+    , mW(glm::normalize(mEyePos - mLookAt))
+    , mU(glm::normalize(glm::cross(mUp, mW)))
+    , mV(glm::cross(mW, mU))
 {
 }
 
-auto Camera::GenerateRay(std::pair<uint32_t, uint32_t> screenPixel) -> Ray<float>
+auto Camera::GenerateRay(std::pair<uint32_t, uint32_t> screenPixel) -> Ray
 {
     const auto [x, y] = screenPixel;
     const float halfWidth = mWidth / 2.0f;
@@ -26,9 +28,9 @@ auto Camera::GenerateRay(std::pair<uint32_t, uint32_t> screenPixel) -> Ray<float
     const float alpha = tan(fovx / 2.0f) * ((((float)x + 0.5f) - halfWidth) / halfWidth) * 2.0f;
     const float beta = tan(fovyRad / 2.0f) * ((halfHeight - ((float)y + 0.5f)) / halfHeight);
 
-    const auto dir = ((mU * alpha) + (mV * beta) - mW).Normalize();
+    const auto dir = glm::normalize((mU * alpha) + (mV * beta) - mW);
 
-    return Ray<float>(mEyePos, dir);
+    return Ray(mEyePos, dir);
 }
 
 auto Camera::GetWidth() const -> uint32_t
@@ -41,7 +43,7 @@ auto Camera::GetHeight() const -> uint32_t
     return mHeight;
 }
 
-auto Camera::GetEyePos() const -> Vec3f
+auto Camera::GetEyePos() const -> glm::vec3
 {
     return mEyePos;
 }

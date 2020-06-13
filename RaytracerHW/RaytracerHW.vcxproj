@@ -119,7 +119,6 @@
     <ClInclude Include="Src\Triangle.hpp" />
     <ClInclude Include="Src\TriangleNormal.hpp" />
     <ClInclude Include="Src\Utils.hpp" />
-    <ClInclude Include="Src\Vec3.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".clang-format" />

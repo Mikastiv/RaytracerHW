@@ -13,15 +13,15 @@ public:
     };
 
 public:
-    PointLight(Vec3f color, Vec3f pos, Attenuation attenuation);
+    PointLight(glm::vec3 color, glm::vec3 pos, Attenuation attenuation);
 
-    auto GenerateLightRay(const Vec3f& srcPos) const -> Ray<float> override;
-    auto GetLightDirection(const Vec3f& srcPos) const -> Vec3f override;
+    auto GenerateLightRay(const glm::vec3& srcPos) const -> Ray override;
+    auto GetLightDirection(const glm::vec3& srcPos) const -> glm::vec3 override;
 
     auto GetAttenuation() const -> Attenuation;
-    auto GetPos() const -> Vec3f;
+    auto GetPos() const -> glm::vec3;
 
 private:
-    Vec3f mPos;
+    glm::vec3 mPos;
     Attenuation mAttenuation;
 };
