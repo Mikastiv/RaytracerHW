@@ -26,4 +26,5 @@ public:
 
 private:
     Material mMaterial;
+    glm::mat4 mTransformation{ 1.0f };
 };
