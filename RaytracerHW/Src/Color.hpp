@@ -55,15 +55,15 @@ public:
     {
         return { GetR(), GetG(), GetB() };
     }
-    auto SetR(uint8_t r) noexcept -> void
+    constexpr auto SetR(uint8_t r) noexcept -> void
     {
         mR = r;
     }
-    auto SetG(uint8_t g) noexcept -> void
+    constexpr auto SetG(uint8_t g) noexcept -> void
     {
         mG = g;
     }
-    auto SetB(uint8_t b) noexcept -> void
+    constexpr auto SetB(uint8_t b) noexcept -> void
     {
         mB = b;
     }

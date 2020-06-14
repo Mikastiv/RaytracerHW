@@ -179,6 +179,14 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
                 glm::vec3{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
             break;
         }
+        case Type::Reflection:
+        {
+            if (params.size() != Config::ReflectionParamCount)
+                ThrowParamCountException(Config::ReflectionToken, c.GetLineNumber());
+
+            mMaterial.mKr = std::get<float>(params[0]);
+            break;
+        }
         case Type::Emission:
         {
             if (params.size() != Config::EmissionParamCount)

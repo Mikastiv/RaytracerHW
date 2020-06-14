@@ -126,6 +126,10 @@ auto Parser::ParseFile(std::string_view file) -> std::vector<Config>
                     {
                         configs.push_back(ExtractParams(Config::Type::Specular, values, i));
                     }
+                    else if (token == Config::ReflectionToken)
+                    {
+                        configs.push_back(ExtractParams(Config::Type::Reflection, values, i));
+                    }
                     else if (token == Config::ShininessToken)
                     {
                         configs.push_back(ExtractParams(Config::Type::Shininess, values, i));

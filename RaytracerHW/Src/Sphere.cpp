@@ -40,7 +40,7 @@ auto Sphere::Intersect(const Ray& ray) const -> std::optional<Intersection>
         return {};
 
     const auto intersectPoint = ray.mOrigin + ray.mDir * t;
-    const auto normal = intersectPoint - mCenter;
+    const auto normal = glm::normalize(intersectPoint - mCenter);
     return Intersection{ *this, { intersectPoint + (normal * Config::Epsilon), normal, t } };
 }
 

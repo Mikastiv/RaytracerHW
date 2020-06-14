@@ -28,9 +28,9 @@ auto Scene::Render() -> void
         const auto ray = mCamera.GenerateRay(*pixel);
         const auto [x, y] = *pixel;
 
-        Color c = mRaytracer.Trace(ray, mCamera.GetEyePos());
+        const auto c = mRaytracer.Trace(ray, mCamera.GetEyePos());
 
-        mImage.PutPixel(x, y, c);
+        mImage.PutPixel(x, y, Color{ c });
 
         const uint32_t charCount = uint32_t(percentage * Config::ProgressBarSize);
         const uint32_t currentPercentage = uint32_t(percentage * 100);

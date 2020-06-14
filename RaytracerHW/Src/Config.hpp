@@ -33,15 +33,17 @@ public:
         Ambient,
         Diffuse,
         Specular,
+        Reflection,
         Shininess,
         Emission
     };
 
 public:
     // clang-format off
-    static constexpr float Epsilon = 0.0001f;
-    static constexpr float TMin = 0.0005f;
+    static constexpr float Epsilon = 0.00002f;
+    static constexpr float TMin = 0.000001f;
     static constexpr float TMax = 100000.0f;
+    static constexpr uint32_t MaxDepth = 5;
     static constexpr uint8_t ProgressBarSize = 50;
 
     // Command Tokens
@@ -67,6 +69,7 @@ public:
     static constexpr std::string_view AmbientToken          = "ambient";
     static constexpr std::string_view DiffuseToken          = "diffuse";
     static constexpr std::string_view SpecularToken         = "specular";
+    static constexpr std::string_view ReflectionToken       = "reflection";
     static constexpr std::string_view ShininessToken        = "shininess";
     static constexpr std::string_view EmissionToken         = "emission";
     // clang-format on
@@ -87,6 +90,7 @@ public:
     static constexpr uint8_t DiffuseParamCount = 3;
     static constexpr uint8_t SpecularParamCount = 3;
     static constexpr uint8_t EmissionParamCount = 3;
+    static constexpr uint8_t ReflectionParamCount = 1;
     static constexpr uint8_t ShininessParamCount = 1;
     static constexpr uint8_t AttenuationParamCount = 3;
 
@@ -105,6 +109,7 @@ public:
                                                   glm::vec3{ 0.4f, 0.4f, 0.4f },
                                                   glm::vec3{ 0.1f, 0.1f, 0.1f },
                                                   glm::vec3{ 0.0f, 0.0f, 0.0f },
+                                                  0.0f,
                                                   50.0f };
     static constexpr glm::vec3 DefaultAttenuation = { 1.0f, 0.0f, 0.0f };
 
