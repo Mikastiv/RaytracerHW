@@ -41,7 +41,7 @@ auto Raytracer::Trace(const Ray& ray, const glm::vec3& eyePos, uint32_t depth) c
         const auto lightRay = l->GenerateLightRay(closestIntersection->mLocalGeo.mPos);
         if (std::any_of(
                 mShapes.cbegin(), mShapes.cend(), [&lightRay](const auto& s) { return s->Intersect(lightRay); }))
-            break;
+            continue;
 
         const auto lightDir = l->GetLightDirection(closestIntersection->mLocalGeo.mPos);
         const auto eyeDir = glm::normalize(eyePos - closestIntersection->mLocalGeo.mPos);

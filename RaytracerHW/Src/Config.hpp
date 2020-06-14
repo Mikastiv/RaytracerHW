@@ -41,7 +41,7 @@ public:
 public:
     // clang-format off
     static constexpr float Epsilon = 0.00002f;
-    static constexpr float TMin = 0.000001f;
+    static constexpr float TMin = 0.00001f;
     static constexpr float TMax = 100000.0f;
     static constexpr uint32_t MaxDepth = 5;
     static constexpr uint8_t ProgressBarSize = 50;

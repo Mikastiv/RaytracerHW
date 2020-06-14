@@ -11,7 +11,7 @@ PointLight::PointLight(glm::vec3 color, glm::vec3 pos, Attenuation attenuation)
 
 auto PointLight::GenerateLightRay(const glm::vec3& srcPos) const -> Ray
 {
-    return { srcPos, glm::normalize(mPos - srcPos) };
+    return { srcPos, GetLightDirection(srcPos) };
 }
 
 auto PointLight::GetLightDirection(const glm::vec3& srcPos) const -> glm::vec3
