@@ -5,7 +5,7 @@
 class Sphere : public Shape
 {
 public:
-    Sphere(Material material, glm::vec3 center, float radius);
+    Sphere(Material material, glm::mat4 transform, glm::vec3 center, float radius);
 
     auto Intersect(const Ray& ray) const -> std::optional<Intersection> override;
 

@@ -4,13 +4,11 @@
 #include <cmath>
 #include <tuple>
 
-Sphere::Sphere(Material material, glm::vec3 center, float radius)
-    : Shape(material)
+Sphere::Sphere(Material material, glm::mat4 transform, glm::vec3 center, float radius)
+    : Shape(material, transform)
     , mCenter(std::move(center))
     , mRadius(radius)
 {
-    mTransformation = glm::translate(mTransformation, glm::vec3{ 2.f, 0.0f, 3.0f }) *
-                      glm::scale(mTransformation, glm::vec3{ 0.75f, 1.5f, 0.75f });
 }
 
 auto Sphere::Intersect(const Ray& ray) const -> std::optional<Intersection>

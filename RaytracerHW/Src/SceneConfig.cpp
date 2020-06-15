@@ -78,6 +78,7 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
 
             mShapes.push_back(std::make_unique<Sphere>(
                 mMaterial,
+                mTransform,
                 glm::vec3{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) },
                 std::get<float>(params[3])));
             break;
@@ -114,6 +115,7 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
 
             mShapes.push_back(std::make_unique<Triangle>(
                 mMaterial,
+                mTransform,
                 mVertices[(size_t)std::get<float>(params[0])],
                 mVertices[(size_t)std::get<float>(params[1])],
                 mVertices[(size_t)std::get<float>(params[2])]));
@@ -126,6 +128,7 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
 
             mShapes.push_back(std::make_unique<TriangleNormal>(
                 mMaterial,
+                mTransform,
                 mVerticesNormals[(size_t)std::get<float>(params[0])],
                 mVerticesNormals[(size_t)std::get<float>(params[1])],
                 mVerticesNormals[(size_t)std::get<float>(params[2])]));
@@ -210,6 +213,48 @@ SceneConfig::SceneConfig(const std::vector<Config>& configs)
                 ThrowParamCountException(Config::AttenuationToken, c.GetLineNumber());
 
             mAttenuation = { std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) };
+            break;
+        }
+        case Type::PushTransform:
+        {
+            mMatrixStack.push(mTransform);
+            break;
+        }
+        case Type::PopTransform:
+        {
+            mTransform = mMatrixStack.top();
+            mMatrixStack.pop();
+            break;
+        }
+        case Type::Rotate:
+        {
+            if (params.size() != Config::RotationParamCount)
+                ThrowParamCountException(Config::RotateToken, c.GetLineNumber());
+
+            mTransform = glm::rotate(
+                mTransform,
+                std::get<float>(params[3]),
+                glm::vec3{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) });
+            break;
+        }
+        case Type::Scale:
+        {
+            if (params.size() != Config::ScaleParamCount)
+                ThrowParamCountException(Config::ScaleToken, c.GetLineNumber());
+
+            mTransform = glm::scale(
+                mTransform,
+                glm::vec3{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) });
+            break;
+        }
+        case Type::Translate:
+        {
+            if (params.size() != Config::TranslationParamCount)
+                ThrowParamCountException(Config::TranslateToken, c.GetLineNumber());
+
+            mTransform = glm::translate(
+                mTransform,
+                glm::vec3{ std::get<float>(params[0]), std::get<float>(params[1]), std::get<float>(params[2]) });
             break;
         }
         default:

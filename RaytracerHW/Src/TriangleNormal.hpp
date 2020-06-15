@@ -6,7 +6,7 @@ class TriangleNormal : public Triangle
 {
 public:
     TriangleNormal(
-        Material material, std::pair<glm::vec3, glm::vec3> v0, std::pair<glm::vec3, glm::vec3> v1,
+        Material material, glm::mat4 transform, std::pair<glm::vec3, glm::vec3> v0, std::pair<glm::vec3, glm::vec3> v1,
         std::pair<glm::vec3, glm::vec3> v2);
 
     auto

@@ -9,8 +9,9 @@
 class Shape
 {
 public:
-    Shape(Material material)
+    Shape(Material material, glm::mat4 transform)
         : mMaterial(material)
+        , mTransformation(transform)
     {
     }
 

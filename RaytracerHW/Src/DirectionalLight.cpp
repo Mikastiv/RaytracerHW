@@ -11,7 +11,7 @@ DirectionalLight::DirectionalLight(glm::vec3 color, glm::vec3 dir)
 
 auto DirectionalLight::GenerateLightRay(const glm::vec3& srcPos) const -> Ray
 {
-    return { srcPos, -mDir, std::numeric_limits<float>::max() };
+    return { srcPos, -mDir, std::numeric_limits<float>::infinity() };
 }
 
 auto DirectionalLight::GetLightDirection(const glm::vec3& srcPos) const -> glm::vec3

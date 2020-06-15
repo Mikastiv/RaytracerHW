@@ -4,8 +4,9 @@
 #include "Shape.hpp"
 #include "PointLight.hpp"
 
-#include <glm\vec3.hpp>
-
+#include <glm\glm.hpp>
+#include <glm\gtc\matrix_transform.hpp>
+#include <stack>
 #include <memory>
 
 class SceneConfig
@@ -47,4 +48,6 @@ private:
     PointLight::Attenuation mAttenuation{ Config::DefaultAttenuation.x,
                                           Config::DefaultAttenuation.y,
                                           Config::DefaultAttenuation.z };
+    std::stack<glm::mat4> mMatrixStack{};
+    glm::mat4 mTransform{1.0f};
 };

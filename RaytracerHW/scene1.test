@@ -30,9 +30,9 @@ maxverts 4
 sphere 0 0 1 .75
 reflection 1
 diffuse 0 1 0
-#sphere 1 .5 2.5 .25
+#sphere 1 .5 1 .25
 
-vertex -.5 .5 5
+vertex -1 .5 4
 vertex -2 1 2
 vertex -2 -1 2
 

@@ -40,7 +40,7 @@ public:
 
 public:
     // clang-format off
-    static constexpr float Epsilon = 0.00002f;
+    static constexpr float Epsilon = 0.00008f;
     static constexpr float TMin = 0.00001f;
     static constexpr float TMax = 100000.0f;
     static constexpr uint32_t MaxDepth = 5;
@@ -93,6 +93,9 @@ public:
     static constexpr uint8_t ReflectionParamCount = 1;
     static constexpr uint8_t ShininessParamCount = 1;
     static constexpr uint8_t AttenuationParamCount = 3;
+    static constexpr uint8_t TranslationParamCount = 3;
+    static constexpr uint8_t RotationParamCount = 4;
+    static constexpr uint8_t ScaleParamCount = 3;
 
     // Default Values
     static constexpr std::string_view DefaultOutputFile = "output.png";
