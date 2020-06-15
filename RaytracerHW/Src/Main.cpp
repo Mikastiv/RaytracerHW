@@ -3,14 +3,17 @@
 #include "Parser.hpp"
 #include "Scene.hpp"
 
-int main()
+int main(int argc, char* argv[])
 {
     std::unique_ptr<Scene> scene = nullptr;
 
     try
     {
+        if (argc < 2)
+            throw std::runtime_error("No command file specified");
+
         std::cout << "Reading file...\n";
-        const auto configs = Parser::ParseFile("scene1.test");
+        const auto configs = Parser::ParseFile(argv[1]);
         const SceneConfig sceneConfig{ configs };
         std::cout << "Generating image...\n";
         scene = std::make_unique<Scene>(sceneConfig);
@@ -28,4 +31,6 @@ int main()
     {
         std::cerr << "Unhandled exception caught\n";
     }
+
+    system("pause");
 }
