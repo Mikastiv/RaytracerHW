@@ -31,13 +31,8 @@ public:
         assert(b <= (float)std::numeric_limits<uint8_t>::max());
     }
     constexpr Color(glm::vec3 rgb) noexcept
-        : mR((uint8_t)(rgb.x * (float)std::numeric_limits<uint8_t>::max()))
-        , mG((uint8_t)(rgb.y * (float)std::numeric_limits<uint8_t>::max()))
-        , mB((uint8_t)(rgb.z * (float)std::numeric_limits<uint8_t>::max()))
+        : Color(rgb.x, rgb.y, rgb.z)
     {
-        assert(rgb.x <= (float)std::numeric_limits<uint8_t>::max());
-        assert(rgb.y <= (float)std::numeric_limits<uint8_t>::max());
-        assert(rgb.z <= (float)std::numeric_limits<uint8_t>::max());
     }
     constexpr auto GetR() const noexcept -> uint8_t
     {

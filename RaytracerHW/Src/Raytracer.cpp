@@ -65,7 +65,7 @@ auto Raytracer::Trace(const Ray& ray, const glm::vec3& eyePos, uint32_t depth) c
         const auto reflectedVec = glm::reflect(ray.mDir, closestIntersection->mLocalGeo.mNormal);
         const Ray reflectedRay{closestIntersection->mLocalGeo.mPos, glm::normalize(reflectedVec)};
 
-        const auto tempColor = Trace(reflectedRay, eyePos, depth + 1);
+        const auto tempColor = Trace(reflectedRay, eyePos, ++depth);
 
         color += tempColor * kr;
     }

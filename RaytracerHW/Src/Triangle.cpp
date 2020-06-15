@@ -41,7 +41,7 @@ auto Triangle::Intersect(const Ray& ray) const -> std::optional<Intersection>
         return {};
 
     const glm::vec3 intersectPoint = ray.mOrigin + ray.mDir * t;
-    const auto normal = glm::normalize(glm::cross((mV2 - mV0), (mV1 - mV0)));
+    const auto normal = glm::normalize(glm::cross(mV2 - mV0, mV1 - mV0));
 
     return Intersection{ *this, { intersectPoint + (normal * Config::Epsilon), normal, t } };
 }

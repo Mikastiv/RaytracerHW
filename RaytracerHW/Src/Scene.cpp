@@ -44,5 +44,6 @@ auto Scene::Render() -> void
         percentage += pixelPercentageDelta;
     }
 
+    std::cout << '\n';
     mImage.Save(mOutputFile);
 }
