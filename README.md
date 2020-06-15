@@ -1,7 +1,7 @@
 # RaytracerHW
 Raytracer for homework on edX
 
-Example: ![Alt](/output.png "Example output")
+![Alt](/RaytracerHW/output.png "Example output")
 
 ## Usage
 This raytracer reads a text file with commands to generate the scene
