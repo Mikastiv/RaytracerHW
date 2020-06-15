@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <variant>
+#include <limits>
 
 class Config
 {
@@ -102,8 +103,8 @@ public:
     static constexpr uint32_t DefaultWidth = 640;
     static constexpr uint32_t DefaultHeight = 480;
     static constexpr uint32_t DefaultMaxRayDepth = 5;
-    static constexpr uint32_t DefaultMaxVertex = 256;
-    static constexpr uint32_t DefaultMaxVertexNorms = 256;
+    static constexpr uint32_t DefaultMaxVertex = std::numeric_limits<uint32_t>::max();
+    static constexpr uint32_t DefaultMaxVertexNorms = std::numeric_limits<uint32_t>::max();
     static constexpr glm::vec3 DefaultEyePos = { 0.0f, 0.0f, 0.0f };
     static constexpr glm::vec3 DefaultLookAt = { 0.0f, 0.0f, 1.0f };
     static constexpr glm::vec3 DefaultUp = { 0.0f, 1.0f, 0.0f };
