@@ -9,11 +9,14 @@
 class Raytracer
 {
 public:
-    Raytracer(std::vector<std::shared_ptr<Shape>>&& shapes, std::vector<std::shared_ptr<Light>>&& lights);
+    Raytracer(
+        std::vector<std::shared_ptr<Shape>>&& shapes, std::vector<std::shared_ptr<Light>>&& lights,
+        uint32_t maxRayDepth);
 
     [[nodiscard]] auto Trace(const Ray& ray, const glm::vec3& eyePos, uint32_t depth = 0) const -> glm::vec3;
 
 private:
     std::vector<std::shared_ptr<Shape>> mShapes;
     std::vector<std::shared_ptr<Light>> mLights;
+    uint32_t mMaxRayDepth;
 };

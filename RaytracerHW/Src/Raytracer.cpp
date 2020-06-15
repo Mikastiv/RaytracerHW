@@ -5,15 +5,17 @@
 
 #include <algorithm>
 
-Raytracer::Raytracer(std::vector<std::shared_ptr<Shape>>&& shapes, std::vector<std::shared_ptr<Light>>&& lights)
+Raytracer::Raytracer(
+    std::vector<std::shared_ptr<Shape>>&& shapes, std::vector<std::shared_ptr<Light>>&& lights, uint32_t maxRayDepth)
     : mShapes(shapes)
     , mLights(lights)
+    , mMaxRayDepth(maxRayDepth)
 {
 }
 
 auto Raytracer::Trace(const Ray& ray, const glm::vec3& eyePos, uint32_t depth) const -> glm::vec3
 {
-    if (depth > Config::MaxDepth)
+    if (depth > mMaxRayDepth)
         return {};
 
     std::optional<Intersection> closestIntersection{};
