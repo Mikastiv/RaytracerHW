@@ -9,6 +9,8 @@ Sphere::Sphere(Material material, glm::vec3 center, float radius)
     , mCenter(std::move(center))
     , mRadius(radius)
 {
+    mTransformation = glm::translate(mTransformation, glm::vec3{ 2.f, 0.0f, 3.0f }) *
+                      glm::scale(mTransformation, glm::vec3{ 0.75f, 1.5f, 0.75f });
 }
 
 auto Sphere::Intersect(const Ray& ray) const -> std::optional<Intersection>

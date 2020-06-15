@@ -1,6 +1,7 @@
 #pragma once
 
-#include <glm\vec3.hpp>
+#include <glm\glm.hpp>
+#include <glm\gtc\matrix_transform.hpp>
 #include "Config.hpp"
 
 #include <utility>
@@ -14,6 +15,17 @@ public:
         , mTMax(tMax)
         , mTMin(tMin)
     {
+    }
+
+    constexpr auto operator*(const glm::mat4& mat) const -> Ray
+    {
+        return Ray{ glm::vec3(mat * glm::vec4(mOrigin, 1.0f)),
+                    glm::normalize(glm::vec3(mat * glm::vec4(mDir, 0.0f))) };
+    }
+
+    constexpr friend auto operator*(glm::mat4 mat, const Ray& ray) -> Ray
+    {
+        return ray * mat;
     }
 
 public:

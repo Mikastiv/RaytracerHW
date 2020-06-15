@@ -19,12 +19,18 @@ public:
     Shade(const glm::vec3& lightDir, glm::vec3 lightColor, const LocalGeo& localGeo, const glm::vec3& halfVec) const
         -> glm::vec3;
 
+    auto GetTransform() const -> const glm::mat4&
+    {
+        return mTransformation;
+    }
     auto GetMaterial() const -> const Material&
     {
         return mMaterial;
     }
 
+protected:
+    glm::mat4 mTransformation{ 1.0f };
+
 private:
     Material mMaterial;
-    glm::mat4 mTransformation{ 1.0f };
 };

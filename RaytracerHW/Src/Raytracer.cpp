@@ -19,7 +19,8 @@ auto Raytracer::Trace(const Ray& ray, const glm::vec3& eyePos, uint32_t depth) c
     std::optional<Intersection> closestIntersection{};
     for (const auto& s : mShapes)
     {
-        if (const auto intersection = s->Intersect(ray))
+        const Ray tempRay = glm::inverse(s->GetTransform()) * ray;
+        if (const auto intersection = s->Intersect(tempRay))
         {
             if (!closestIntersection)
             {
@@ -35,12 +36,15 @@ auto Raytracer::Trace(const Ray& ray, const glm::vec3& eyePos, uint32_t depth) c
     if (!closestIntersection)
         return {};
 
+    closestIntersection->mLocalGeo = closestIntersection->mShape.GetTransform() * closestIntersection->mLocalGeo;
+
     glm::vec3 color{};
     for (const auto& l : mLights)
     {
-        const auto lightRay = l->GenerateLightRay(closestIntersection->mLocalGeo.mPos);
-        if (std::any_of(
-                mShapes.cbegin(), mShapes.cend(), [&lightRay](const auto& s) { return s->Intersect(lightRay); }))
+        const auto lightRay = glm::inverse(closestIntersection->mShape.GetTransform()) *
+                              l->GenerateLightRay(closestIntersection->mLocalGeo.mPos);
+
+        if (std::any_of(mShapes.cbegin(), mShapes.cend(), [&](const auto& s) { return s->Intersect(lightRay); }))
             continue;
 
         const auto lightDir = l->GetLightDirection(closestIntersection->mLocalGeo.mPos);
@@ -62,8 +66,9 @@ auto Raytracer::Trace(const Ray& ray, const glm::vec3& eyePos, uint32_t depth) c
     const float kr = closestIntersection->mShape.GetMaterial().mKr;
     if (kr > 0.0f)
     {
-        const auto reflectedVec = glm::reflect(ray.mDir, closestIntersection->mLocalGeo.mNormal);
-        const Ray reflectedRay{closestIntersection->mLocalGeo.mPos, glm::normalize(reflectedVec)};
+        const Ray tempRay = glm::inverse(closestIntersection->mShape.GetTransform()) * ray;
+        const auto reflectedVec = glm::reflect(tempRay.mDir, closestIntersection->mLocalGeo.mNormal);
+        const Ray reflectedRay{ closestIntersection->mLocalGeo.mPos, glm::normalize(reflectedVec) };
 
         const auto tempColor = Trace(reflectedRay, eyePos, ++depth);
 
