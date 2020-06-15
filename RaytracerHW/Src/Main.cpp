@@ -9,8 +9,10 @@ int main()
 
     try
     {
-        const auto configs = Parser::ParseFile("scene3.test");
+        std::cout << "Reading file...\n";
+        const auto configs = Parser::ParseFile("scene4-diffuse.test");
         const SceneConfig sceneConfig{ configs };
+        std::cout << "Generating image...\n";
         scene = std::make_unique<Scene>(sceneConfig);
         scene->Render();
     }
