@@ -10,7 +10,7 @@ int main()
     try
     {
         std::cout << "Reading file...\n";
-        const auto configs = Parser::ParseFile("scene4-diffuse.test");
+        const auto configs = Parser::ParseFile("scene1.test");
         const SceneConfig sceneConfig{ configs };
         std::cout << "Generating image...\n";
         scene = std::make_unique<Scene>(sceneConfig);

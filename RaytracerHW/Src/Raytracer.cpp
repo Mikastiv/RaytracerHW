@@ -66,8 +66,7 @@ auto Raytracer::Trace(const Ray& ray, const glm::vec3& eyePos, uint32_t depth) c
     const float kr = closestIntersection->mShape.GetMaterial().mKr;
     if (kr > 0.0f)
     {
-        const Ray tempRay = glm::inverse(closestIntersection->mShape.GetTransform()) * ray;
-        const auto reflectedVec = glm::reflect(tempRay.mDir, closestIntersection->mLocalGeo.mNormal);
+        const auto reflectedVec = glm::reflect(ray.mDir, closestIntersection->mLocalGeo.mNormal);
         const Ray reflectedRay{ closestIntersection->mLocalGeo.mPos, glm::normalize(reflectedVec) };
 
         const auto tempColor = Trace(reflectedRay, eyePos, ++depth);

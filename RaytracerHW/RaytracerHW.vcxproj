@@ -123,15 +123,6 @@
   <ItemGroup>
     <None Include=".clang-format" />
     <None Include="scene1.test" />
-    <None Include="scene2.test" />
-    <None Include="scene3.test" />
-    <None Include="scene4-ambient.test" />
-    <None Include="scene4-diffuse.test" />
-    <None Include="scene4-emission.test" />
-    <None Include="scene4-specular.test" />
-    <None Include="scene5.test" />
-    <None Include="scene6.test" />
-    <None Include="scene7.test" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Licenses\OpenImageIO.txt" />
