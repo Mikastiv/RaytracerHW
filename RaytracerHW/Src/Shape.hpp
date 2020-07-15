@@ -14,6 +14,7 @@ public:
         , mTransformation(transform)
     {
     }
+    virtual ~Shape() = default;
 
     virtual auto Intersect(const Ray& ray) const -> std::optional<Intersection> = 0;
     virtual auto
